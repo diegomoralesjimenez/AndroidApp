@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Personal">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/roboto_black"
+            android:text="Personal"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName3"
+            android:layout_width="390dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="#EE000000"
+            android:backgroundTint="#75E6E4E4"
+            android:ems="10"
+            android:fontFamily="@font/roboto_medium"
+            android:hint="Nombre"
+            android:inputType="textPersonName"
+            android:paddingLeft="25dp"
+            android:textColor="#000000"
+            android:textColorHint="#7C000000"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextDireccion"
+            android:layout_width="390dp"
+            android:layout_height="49dp"
+            android:layout_marginBottom="10dp"
+            android:background="#EE000000"
+            android:backgroundTint="#75E6E4E4"
+            android:ems="10"
+            android:fontFamily="@font/roboto_medium"
+            android:hint="Direcion"
+            android:inputType="textPersonName"
+            android:paddingLeft="25dp"
+            android:textColor="#000000"
+            android:textColorHint="#7C000000"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextDate"
+            android:layout_width="390dp"
+            android:layout_height="49dp"
+            android:layout_marginBottom="10dp"
+            android:background="#EE000000"
+            android:backgroundTint="#75E6E4E4"
+            android:ems="10"
+            android:fontFamily="@font/roboto_medium"
+            android:hint="Fecha de Nacimiento"
+            android:inputType="date"
+            android:paddingLeft="25dp"
+            android:textColor="#000000"
+            android:textColorHint="#7C000000"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Estado Civil"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:text="Soltero" />
+
+        <CheckBox
+            android:id="@+id/checkBox3"
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Casado" />
+
+        <EditText
+            android:id="@+id/editTextNumber"
+            android:layout_width="390dp"
+            android:layout_height="49dp"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:paddingBottom="4dp"
+            android:inputType="number"
+            android:background="#EE000000"
+            android:backgroundTint="#75E6E4E4"
+            android:fontFamily="@font/roboto_medium"
+            android:hint="Salario"
+            android:paddingLeft="25dp"
+            android:textColor="#000000"
+            android:textColorHint="#7C000000"
+            android:textSize="14sp"/>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            android:fontFamily="@font/roboto_black"
+            android:text="Actualizar"
+            android:textAllCaps="false"
+           />
+
+    </LinearLayout>
+
+</FrameLayout>

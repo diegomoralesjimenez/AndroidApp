@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Cliente"
+        android:id="@+id/cliente"
+        android:icon="@drawable/baseline_home_24"
+        />
+    <item android:title="Prestamo"
+        android:id="@+id/prestamo"
+        android:icon="@drawable/baseline_bar_chart_24"
+        />
+    <item android:title="Personal"
+        android:id="@+id/personal"
+        android:icon="@drawable/outline_segment_24"
+        />
+</menu>

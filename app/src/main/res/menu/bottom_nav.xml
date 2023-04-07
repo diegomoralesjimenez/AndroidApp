@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Prestamo"
+          android:id="@+id/prestamo"
+          android:icon="@drawable/baseline_home_24"
+        tools:ignore="HardcodedText" />
+    <item android:title="Ahorro"
+        android:id="@+id/ahorro"
+        android:icon="@drawable/baseline_bar_chart_24"
+        tools:ignore="HardcodedText" />
+    <item android:title="Cuota"
+        android:id="@+id/cuota"
+        android:icon="@drawable/baseline_compare_arrows_24"
+        tools:ignore="HardcodedText" />
+    <item android:title="Personal"
+        android:id="@+id/personal"
+        android:icon="@drawable/outline_segment_24"
+        tools:ignore="HardcodedText" />
+</menu>
