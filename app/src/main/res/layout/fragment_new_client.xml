@@ -24,7 +24,7 @@
             android:textSize="26sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName3"
+            android:id="@+id/nombre"
             android:layout_width="390dp"
             android:layout_height="49dp"
             android:layout_marginTop="20dp"
@@ -41,7 +41,7 @@
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/editTextDireccion"
+            android:id="@+id/direccion"
             android:layout_width="390dp"
             android:layout_height="49dp"
             android:layout_marginBottom="10dp"
@@ -57,7 +57,7 @@
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/editTextDate"
+            android:id="@+id/fechaNacimiento"
             android:layout_width="390dp"
             android:layout_height="49dp"
             android:layout_marginBottom="10dp"
@@ -113,7 +113,7 @@
             android:textSize="14sp"/>
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/add"
             android:layout_width="390dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"

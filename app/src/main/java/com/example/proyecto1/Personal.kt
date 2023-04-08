@@ -36,7 +36,7 @@ class Personal : Fragment() {
         direccionTextView = view.findViewById(R.id.direccion)
         fechaTextView = view.findViewById(R.id.fechaNacimiento)
 
-        // Agarra la informacion de la collecion de los usuarios de la base de datos
+        // [GET] Agarra la informacion de la collecion de los usuarios de la base de datos
         val docRef = db.collection("Users").document(userId)
         docRef.get().addOnSuccessListener { documentSnapshot ->
             if (documentSnapshot.exists()) {
