@@ -36,10 +36,12 @@ class Personal : Fragment() {
         direccionTextView = view.findViewById(R.id.direccion)
         fechaTextView = view.findViewById(R.id.fechaNacimiento)
 
-        // Agarra la informaacion de la collecion de los usuarios de la base de datos
+        // Agarra la informacion de la collecion de los usuarios de la base de datos
         val docRef = db.collection("Users").document(userId)
         docRef.get().addOnSuccessListener { documentSnapshot ->
             if (documentSnapshot.exists()) {
+
+                //Get a los valores de la coleccion
                 val nombre = documentSnapshot.getString("Nombre")
                 val direccion = documentSnapshot.getString("Direccion")
                 val fechaNacimiento = documentSnapshot.getString("FechaNacimiento")
@@ -52,11 +54,15 @@ class Personal : Fragment() {
         //Actualiza los Usuarios en la base de datos
         val updateButton = view.findViewById<Button>(R.id.update)
         updateButton.setOnClickListener {
+            //Datos que se actualizan
             val newNombre = nombreTextView.text.toString()
             val newDireccion = direccionTextView.text.toString()
             val newFechaNacimiento = fechaTextView.text.toString()
 
+            //Coleccion
             val userRef = db.collection("Users").document(userId)
+
+            //Update a los valores de la coleccion;
             userRef.update("Nombre", newNombre, "Direccion", newDireccion, "FechaNacimiento", newFechaNacimiento)
                 .addOnSuccessListener {
                     Toast.makeText(context, "Profile updated", Toast.LENGTH_SHORT).show()
