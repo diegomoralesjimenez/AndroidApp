@@ -20,8 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/green"
-            app:title="Bienvenido Cliente"
-            app:titleTextColor="#FFFF">
+            app:title=""
+            app:titleTextColor="#FFFF"
+            tools:ignore="MissingClass">
 
             <Button
                 android:id="@+id/sign_out_button"
