@@ -1,8 +1,7 @@
 package com.example.proyecto1
 
 import android.os.Bundle
-import android.widget.TextView
-
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -12,10 +11,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 
+
 class ClientActivity : AppCompatActivity() {
     private lateinit var binding: ActivityClientBinding
     private lateinit var toolbar: Toolbar
     private lateinit var auth: FirebaseAuth
+    private lateinit var frameLayout: FrameLayout
 
     private val authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
         val user: FirebaseUser? = firebaseAuth.currentUser
@@ -38,12 +39,11 @@ class ClientActivity : AppCompatActivity() {
 
         toolbar = findViewById(R.id.welcome)
 
-        
-        replaceFragment(Prestamo())
+        frameLayout = findViewById(R.id.appLayout)
 
         binding.navigationLayout.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.prestamo -> replaceFragment(Prestamo())
+                R.id.prestamo -> (replaceFragment(Prestamo()))
                 R.id.ahorro -> replaceFragment(Ahorro())
                 R.id.cuota -> replaceFragment(Cuota())
                 R.id.personal -> replaceFragment(Personal())
@@ -67,7 +67,7 @@ class ClientActivity : AppCompatActivity() {
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager: FragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frame_layout, fragment)
+        fragmentTransaction.replace(R.id.appLayout, fragment)
         fragmentTransaction.commit()
     }
 }
