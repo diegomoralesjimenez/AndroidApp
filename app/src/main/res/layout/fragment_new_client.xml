@@ -5,20 +5,19 @@
     android:layout_height="match_parent"
     tools:context=".Personal">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginLeft="10dp">
+        android:layout_marginStart="10dp"
+        tools:ignore="UselessParent">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:fontFamily="@font/roboto_black"
-            android:text="Nuevo Cliente"
+            android:text="@string/nuevo_cliente"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="26sp" />
@@ -33,12 +32,14 @@
             android:backgroundTint="#75E6E4E4"
             android:ems="10"
             android:fontFamily="@font/roboto_medium"
-            android:hint="Nombre"
+            android:hint="@string/nombre"
             android:inputType="textPersonName"
             android:paddingLeft="25dp"
             android:textColor="#000000"
             android:textColorHint="#7C000000"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:autofillHints=""
+            tools:ignore="RtlSymmetry" />
 
         <EditText
             android:id="@+id/direccion"
