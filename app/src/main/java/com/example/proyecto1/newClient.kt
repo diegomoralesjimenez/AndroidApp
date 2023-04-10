@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class NewClient : Fragment() {
+class newClient : Fragment() {
 
     private lateinit var cedulaTextView: TextView
     private lateinit var nombreTextView: TextView

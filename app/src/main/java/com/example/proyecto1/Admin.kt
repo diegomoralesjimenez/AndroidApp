@@ -51,7 +51,7 @@ class Admin : AppCompatActivity() {
 
         binding.navigationLayout.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.cliente -> (replaceFragment(NewClient()))
+                R.id.cliente -> (replaceFragment(newClient()))
                 R.id.prestamo -> replaceFragment(AsignarPrestamo())
             }
             true
@@ -72,7 +72,7 @@ class Admin : AppCompatActivity() {
         }
 
         //Add default fragment
-        replaceFragment(NewClient())
+        replaceFragment(newClient())
     }
 
     private fun replaceFragment(fragment: Fragment) {
