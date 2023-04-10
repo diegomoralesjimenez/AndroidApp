@@ -1,26 +1,31 @@
 package com.example.proyecto1
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class newClient : Fragment() {
+class NewClient : Fragment() {
 
+    private lateinit var cedulaTextView: TextView
     private lateinit var nombreTextView: TextView
+    private lateinit var contrasenaTextView: TextView
     private lateinit var direccionTextView: TextView
     private lateinit var fechaTextView: TextView
+    private var estadoCivilGroup : RadioGroup? = null
+    lateinit var estadoCiv: RadioButton
+    private lateinit var salarioTextView: TextView
 
     private lateinit var db: FirebaseFirestore
     private lateinit var userId: String
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,25 +38,42 @@ class newClient : Fragment() {
         userId = FirebaseAuth.getInstance().currentUser!!.uid
 
         // Variables inicializadas
+
+        cedulaTextView = view.findViewById(R.id.cedula)
         nombreTextView = view.findViewById(R.id.nombre)
+        contrasenaTextView = view.findViewById(R.id.contraseña)
         direccionTextView = view.findViewById(R.id.direccion)
         fechaTextView = view.findViewById(R.id.fechaNacimiento)
+        estadoCivilGroup = view.findViewById(R.id.radioGroup)
+        salarioTextView = view.findViewById(R.id.txtSalario)
 
         val addButton = view.findViewById<Button>(R.id.add)
         addButton.setOnClickListener {
             //Datos que se actualizan
+            val newCedula = cedulaTextView.text.toString()
             val newNombre = nombreTextView.text.toString()
+            val newContrasena = contrasenaTextView.text.toString()
             val newDireccion = direccionTextView.text.toString()
             val newFechaNacimiento = fechaTextView.text.toString()
+
+            val opcionEstadoCiv : Int = estadoCivilGroup!!.checkedRadioButtonId
+            estadoCiv = view.findViewById(opcionEstadoCiv)
+            val newEstadoCiv = estadoCiv.text.toString()
+
+            val newSalario = salarioTextView.text.toString()
 
             //Coleccion
             val userRef = db.collection("Users").document()
 
             //Creacion de los valores de la coleccion
             val user = hashMapOf(
+                "Cedula" to newCedula,
                 "Nombre" to newNombre,
+                "Contraseña" to newContrasena,
                 "Direccion" to newDireccion,
-                "FechaNacimiento" to newFechaNacimiento
+                "FechaNacimiento" to newFechaNacimiento,
+                "EstadoCivil" to newEstadoCiv,
+                "Salario" to newSalario
             )
 
             userRef.set(user)

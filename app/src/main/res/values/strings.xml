@@ -22,4 +22,6 @@
     <string name="calcular">CALCULAR</string>
     <string name="nuevo_cliente">Nuevo Cliente</string>
     <string name="nombre">Nombre</string>
+    <string name="cedula">Cedula</string>
+    <string name="contraseña">Contraseña</string>
 </resources>
