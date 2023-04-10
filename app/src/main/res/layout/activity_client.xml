@@ -27,7 +27,7 @@
                 tools:ignore="MissingClass">
 
                 <Button
-                    android:id="@+id/sign_out_button"
+                    android:id="@+id/btn_logout"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

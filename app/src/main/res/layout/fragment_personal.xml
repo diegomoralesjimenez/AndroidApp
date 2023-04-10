@@ -11,13 +11,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="45dp"
+        android:paddingTop="30dp"
+        android:paddingRight="45dp"
+        android:paddingBottom="50dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/roboto_black"
             android:text="Personal"
             android:textAlignment="center"
@@ -26,7 +28,7 @@
 
         <EditText
             android:id="@+id/nombre"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="49dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
@@ -43,7 +45,7 @@
 
         <EditText
             android:id="@+id/direccion"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="49dp"
             android:layout_marginBottom="10dp"
             android:background="#EE000000"
@@ -59,7 +61,7 @@
 
         <EditText
             android:id="@+id/fechaNacimiento"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="49dp"
             android:layout_marginBottom="10dp"
             android:background="#EE000000"
@@ -85,20 +87,20 @@
 
         <CheckBox
             android:id="@+id/checkBox2"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Soltero" />
 
         <CheckBox
             android:id="@+id/checkBox3"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:text="Casado" />
 
         <EditText
             android:id="@+id/editTextNumber"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="49dp"
             android:layout_marginBottom="20dp"
             android:background="#EE000000"
@@ -115,7 +117,7 @@
 
         <Button
             android:id="@+id/update"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
             android:fontFamily="@font/roboto_black"
