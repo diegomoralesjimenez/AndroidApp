@@ -2,6 +2,7 @@ package com.example.proyecto1
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+
 
 class newClient : Fragment() {
 
@@ -58,40 +60,60 @@ class newClient : Fragment() {
     // Metodo insertar nuevo cliente
 
     fun insertar(view : View){
-        //Datos que se actualizan
-        val newCedula = cedulaTextView.text.toString()
-        val newNombre = nombreTextView.text.toString()
-        val newContrasena = contrasenaTextView.text.toString()
-        val newDireccion = direccionTextView.text.toString()
-        val newFechaNacimiento = fechaTextView.text.toString()
 
-        val opcionEstadoCiv : Int = estadoCivilGroup!!.checkedRadioButtonId
-        estadoCiv = view.findViewById(opcionEstadoCiv)
-        val newEstadoCiv = estadoCiv.text.toString()
+        if (validarAtributos()) {
+            //Datos que se actualizan
+            val newCedula = cedulaTextView.text.toString()
+            val newNombre = nombreTextView.text.toString()
+            val newContrasena = contrasenaTextView.text.toString()
+            val newDireccion = direccionTextView.text.toString()
+            val newFechaNacimiento = fechaTextView.text.toString()
 
-        val newSalario = salarioTextView.text.toString()
+            // Captura informacion desde los RadioGroup
+            val opcionEstadoCiv : Int = estadoCivilGroup!!.checkedRadioButtonId
+            estadoCiv = view.findViewById(opcionEstadoCiv)
+            val newEstadoCiv = estadoCiv.text.toString()
 
-        //Coleccion
-        val userRef = db.collection("Users").document()
+            val newSalario = salarioTextView.text.toString()
 
-        //Creacion de los valores de la coleccion
-        val user = hashMapOf(
-            "Cedula" to newCedula,
-            "Nombre" to newNombre,
-            "Contraseña" to newContrasena,
-            "Direccion" to newDireccion,
-            "FechaNacimiento" to newFechaNacimiento,
-            "EstadoCivil" to newEstadoCiv,
-            "Salario" to newSalario
-        )
 
-        userRef.set(user)
-            .addOnSuccessListener {
-                Toast.makeText(context, "Cliente agregado satisfactoriamente!", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(context, "Error al agregar el cliente.", Toast.LENGTH_SHORT).show()
-            }
+            //Coleccion
+            val userRef = db.collection("Users").document()
+
+            //Creacion de los valores de la coleccion
+            val user = hashMapOf(
+                "Cedula" to newCedula,
+                "Nombre" to newNombre,
+                "Contraseña" to newContrasena,
+                "Direccion" to newDireccion,
+                "FechaNacimiento" to newFechaNacimiento,
+                "EstadoCivil" to newEstadoCiv,
+                "Salario" to newSalario
+            )
+
+            userRef.set(user)
+                .addOnSuccessListener {
+                    Toast.makeText(context, "Cliente agregado satisfactoriamente!", Toast.LENGTH_SHORT)
+                        .show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(context, "Error al agregar el cliente.", Toast.LENGTH_SHORT).show()
+                }
+        }else{
+            Toast.makeText(context, "Todos los espacios deben llenarse.", Toast.LENGTH_SHORT).show()
+        }
     }
+
+
+    private fun validarAtributos(): Boolean {
+        return !cedulaTextView.text.isEmpty() &&
+                !nombreTextView.text.isEmpty() &&
+                !contrasenaTextView.text.isEmpty() &&
+                !direccionTextView.text.isEmpty() &&
+                !fechaTextView.text.isEmpty() &&
+                (estadoCivilGroup != null && estadoCivilGroup!!.checkedRadioButtonId != -1) &&
+                !salarioTextView.text.isEmpty()
+    }
+
 
 }
