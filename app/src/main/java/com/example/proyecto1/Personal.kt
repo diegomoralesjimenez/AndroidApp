@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -16,6 +17,8 @@ class Personal : Fragment() {
     private lateinit var nombreTextView: TextView
     private lateinit var direccionTextView: TextView
     private lateinit var fechaTextView: TextView
+    private lateinit var apellidoView: TextView
+    private lateinit var salarioView: EditText
 
     private lateinit var db: FirebaseFirestore
     private lateinit var userId: String
@@ -35,6 +38,8 @@ class Personal : Fragment() {
         nombreTextView = view.findViewById(R.id.nombre)
         direccionTextView = view.findViewById(R.id.direccion)
         fechaTextView = view.findViewById(R.id.fechaNacimiento)
+        apellidoView = view.findViewById(R.id.apellidos)
+        salarioView = view.findViewById(R.id.salario)
 
         // [GET] Agarra la informacion de la collecion de los usuarios de la base de datos
         val docRef = db.collection("Users").document(userId)
@@ -45,9 +50,13 @@ class Personal : Fragment() {
                 val nombre = documentSnapshot.getString("Nombre")
                 val direccion = documentSnapshot.getString("Direccion")
                 val fechaNacimiento = documentSnapshot.getString("FechaNacimiento")
+                val salario = documentSnapshot.getDouble("Salario")
+                val apellidos = documentSnapshot.getString("Apellidos")
                 nombreTextView.text = nombre
                 direccionTextView.text = direccion
                 fechaTextView.text = fechaNacimiento
+                salarioView.setText(salario.toString())
+                apellidoView.text = apellidos
             }
         }
 
@@ -58,12 +67,14 @@ class Personal : Fragment() {
             val newNombre = nombreTextView.text.toString()
             val newDireccion = direccionTextView.text.toString()
             val newFechaNacimiento = fechaTextView.text.toString()
+            val newSalario = salarioView.text.toString().toDoubleOrNull()
+            val newApellido = apellidoView.text.toString()
 
             //Coleccion
             val userRef = db.collection("Users").document(userId)
 
             //Update a los valores de la coleccion;
-            userRef.update("Nombre", newNombre, "Direccion", newDireccion, "FechaNacimiento", newFechaNacimiento)
+            userRef.update("Nombre", newNombre, "Apellidos", newApellido,  "Direccion", newDireccion, "FechaNacimiento", newFechaNacimiento, "Salario", newSalario)
                 .addOnSuccessListener {
                     Toast.makeText(context, "Profile updated", Toast.LENGTH_SHORT).show()
                 }

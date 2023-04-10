@@ -32,7 +32,7 @@
                 android:textSize="26sp" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/titulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -43,13 +43,14 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/editTextNumber"
+                android:id="@+id/salario"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="#EE000000"
                 android:backgroundTint="#75E6E4E4"
+                android:editable="false"
                 android:ems="10"
                 android:fontFamily="@font/roboto_medium"
                 android:hint="Salario"
@@ -57,7 +58,9 @@
                 android:paddingLeft="25dp"
                 android:textColor="#000000"
                 android:textColorHint="#7C000000"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:focusable="false"
+                android:clickable="false"/>
 
             <TextView
                 android:id="@+id/textView14"
