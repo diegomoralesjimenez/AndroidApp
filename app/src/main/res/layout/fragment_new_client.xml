@@ -3,19 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Personal">
+    tools:context=".newClient"
+    android:background="@color/whiteClear">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
         android:orientation="vertical"
-        tools:ignore="UselessParent">
+        android:paddingLeft="45dp"
+        android:paddingTop="30dp"
+        android:paddingRight="45dp"
+        android:paddingBottom="50dp"
+        tools:ignore="TextSizeCheck">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:fontFamily="@font/roboto_black"
             android:text="@string/nuevo_cliente"
             android:textAlignment="center"
@@ -24,7 +27,7 @@
 
         <EditText
             android:id="@+id/cedula"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="49dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
@@ -43,7 +46,7 @@
 
         <EditText
             android:id="@+id/nombre"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="49dp"
             android:layout_marginBottom="10dp"
             android:autofillHints=""
@@ -61,7 +64,7 @@
 
         <EditText
             android:id="@+id/contraseña"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="49dp"
             android:layout_marginBottom="10dp"
             android:autofillHints=""
@@ -79,7 +82,7 @@
 
         <EditText
             android:id="@+id/direccion"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="49dp"
             android:layout_marginBottom="10dp"
             android:background="#EE000000"
@@ -96,7 +99,7 @@
 
         <EditText
             android:id="@+id/fechaNacimiento"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="49dp"
             android:layout_marginBottom="10dp"
             android:background="#EE000000"
@@ -119,7 +122,7 @@
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/roboto_bold"
             android:text="Estado Civil"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="16sp"
             tools:ignore="HardcodedText,RtlHardcoded" />
 
@@ -145,7 +148,7 @@
 
         <EditText
             android:id="@+id/txtSalario"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="49dp"
             android:layout_marginBottom="20dp"
             android:background="#EE000000"
@@ -163,7 +166,7 @@
 
         <Button
             android:id="@+id/add"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
             android:fontFamily="@font/roboto_black"

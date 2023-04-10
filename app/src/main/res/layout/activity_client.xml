@@ -20,7 +20,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/welcome"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="wrap_content"
                 android:background="@color/green"
                 app:title=""
                 app:titleTextColor="#FFFF"

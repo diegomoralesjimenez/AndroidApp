@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="Cliente"
-        android:id="@+id/cliente"
+        android:id="@+id/newClient"
         android:icon="@drawable/baseline_home_24"
         />
     <item android:title="Prestamo"
-        android:id="@+id/prestamo"
+        android:id="@+id/newPrestamo"
         android:icon="@drawable/baseline_bar_chart_24"
         />
     <item android:title="Personal"
