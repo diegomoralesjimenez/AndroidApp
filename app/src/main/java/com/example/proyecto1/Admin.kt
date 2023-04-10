@@ -15,7 +15,7 @@ class Admin : AppCompatActivity() {
 
         binding.navigationLayout.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.cliente -> (replaceFragment(newClient()))
+                R.id.cliente -> (replaceFragment(NewClient()))
                 R.id.prestamo -> replaceFragment(AsignarPrestamo())
             }
             true

@@ -28,6 +28,25 @@
             android:layout_height="49dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
+            android:autofillHints=""
+            android:background="#EE000000"
+            android:backgroundTint="#75E6E4E4"
+            android:ems="10"
+            android:fontFamily="@font/roboto_medium"
+            android:hint="@string/cedula"
+            android:inputType="textPersonName"
+            android:paddingLeft="25dp"
+            android:textColor="#000000"
+            android:textColorHint="#7C000000"
+            android:textSize="14sp"
+            tools:ignore="RtlHardcoded,RtlSymmetry,TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/cedula"
+            android:layout_width="390dp"
+            android:layout_height="49dp"
+            android:layout_marginBottom="10dp"
+            android:autofillHints=""
             android:background="#EE000000"
             android:backgroundTint="#75E6E4E4"
             android:ems="10"
@@ -38,8 +57,25 @@
             android:textColor="#000000"
             android:textColorHint="#7C000000"
             android:textSize="14sp"
+            tools:ignore="RtlHardcoded,RtlSymmetry,TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/contraseña"
+            android:layout_width="390dp"
+            android:layout_height="49dp"
+            android:layout_marginBottom="10dp"
             android:autofillHints=""
-            tools:ignore="RtlSymmetry" />
+            android:background="#EE000000"
+            android:backgroundTint="#75E6E4E4"
+            android:ems="10"
+            android:fontFamily="@font/roboto_medium"
+            android:hint="@string/contraseña"
+            android:inputType="textPersonName"
+            android:paddingLeft="25dp"
+            android:textColor="#000000"
+            android:textColorHint="#7C000000"
+            android:textSize="14sp"
+            tools:ignore="RtlHardcoded,RtlSymmetry,TextContrastCheck"/>
 
         <EditText
             android:id="@+id/direccion"
@@ -55,7 +91,8 @@
             android:paddingLeft="25dp"
             android:textColor="#000000"
             android:textColorHint="#7C000000"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck" />
 
         <EditText
             android:id="@+id/fechaNacimiento"
@@ -71,7 +108,8 @@
             android:paddingLeft="25dp"
             android:textColor="#000000"
             android:textColorHint="#7C000000"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck" />
 
         <TextView
             android:id="@+id/textView3"
@@ -81,37 +119,46 @@
             android:fontFamily="@font/roboto_bold"
             android:text="Estado Civil"
             android:textColor="#FFFFFF"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:ignore="HardcodedText,RtlHardcoded" />
 
-        <CheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="390dp"
-            android:layout_height="wrap_content"
-            android:text="Soltero" />
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <CheckBox
-            android:id="@+id/checkBox3"
-            android:layout_width="390dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="Casado" />
+            <RadioButton
+                android:id="@+id/soltero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Soltero"
+                tools:ignore="HardcodedText,TextContrastCheck,VisualLintButtonSize" />
+
+            <RadioButton
+                android:id="@+id/casado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Casado"
+                tools:ignore="HardcodedText,TextContrastCheck,VisualLintButtonSize" />
+        </RadioGroup>
 
         <EditText
-            android:id="@+id/editTextNumber"
+            android:id="@+id/txtSalario"
             android:layout_width="390dp"
             android:layout_height="49dp"
             android:layout_marginBottom="20dp"
-            android:ems="10"
-            android:paddingBottom="4dp"
-            android:inputType="number"
             android:background="#EE000000"
             android:backgroundTint="#75E6E4E4"
+            android:ems="10"
             android:fontFamily="@font/roboto_medium"
             android:hint="Salario"
+            android:inputType="number"
             android:paddingLeft="25dp"
+            android:paddingBottom="4dp"
             android:textColor="#000000"
             android:textColorHint="#7C000000"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck" />
 
         <Button
             android:id="@+id/add"
@@ -121,7 +168,7 @@
             android:fontFamily="@font/roboto_black"
             android:text="Agregar"
             android:textAllCaps="false"
-            />
+            tools:ignore="HardcodedText,VisualLintButtonSize" />
 
     </LinearLayout>
 
