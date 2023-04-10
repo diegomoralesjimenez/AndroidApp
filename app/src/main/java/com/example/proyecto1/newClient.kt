@@ -49,49 +49,49 @@ class NewClient : Fragment() {
 
         val addButton = view.findViewById<Button>(R.id.add)
         addButton.setOnClickListener {
-            //Datos que se actualizan
-            val newCedula = cedulaTextView.text.toString()
-            val newNombre = nombreTextView.text.toString()
-            val newContrasena = contrasenaTextView.text.toString()
-            val newDireccion = direccionTextView.text.toString()
-            val newFechaNacimiento = fechaTextView.text.toString()
-
-            val opcionEstadoCiv : Int = estadoCivilGroup!!.checkedRadioButtonId
-            estadoCiv = view.findViewById(opcionEstadoCiv)
-            val newEstadoCiv = estadoCiv.text.toString()
-
-            val newSalario = salarioTextView.text.toString()
-
-            //Coleccion
-            val userRef = db.collection("Users").document()
-
-            //Creacion de los valores de la coleccion
-            val user = hashMapOf(
-                "Cedula" to newCedula,
-                "Nombre" to newNombre,
-                "Contraseña" to newContrasena,
-                "Direccion" to newDireccion,
-                "FechaNacimiento" to newFechaNacimiento,
-                "EstadoCivil" to newEstadoCiv,
-                "Salario" to newSalario
-            )
-
-            userRef.set(user)
-                .addOnSuccessListener {
-                    Toast.makeText(context, "Cliente agregado satisfactoriamente!", Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(context, "Error al agregar el cliente.", Toast.LENGTH_SHORT).show()
-                }
+            insertar(view)
         }
-
-
 
         return view
     }
 
     // Metodo insertar nuevo cliente
 
+    fun insertar(view : View){
+        //Datos que se actualizan
+        val newCedula = cedulaTextView.text.toString()
+        val newNombre = nombreTextView.text.toString()
+        val newContrasena = contrasenaTextView.text.toString()
+        val newDireccion = direccionTextView.text.toString()
+        val newFechaNacimiento = fechaTextView.text.toString()
 
+        val opcionEstadoCiv : Int = estadoCivilGroup!!.checkedRadioButtonId
+        estadoCiv = view.findViewById(opcionEstadoCiv)
+        val newEstadoCiv = estadoCiv.text.toString()
+
+        val newSalario = salarioTextView.text.toString()
+
+        //Coleccion
+        val userRef = db.collection("Users").document()
+
+        //Creacion de los valores de la coleccion
+        val user = hashMapOf(
+            "Cedula" to newCedula,
+            "Nombre" to newNombre,
+            "Contraseña" to newContrasena,
+            "Direccion" to newDireccion,
+            "FechaNacimiento" to newFechaNacimiento,
+            "EstadoCivil" to newEstadoCiv,
+            "Salario" to newSalario
+        )
+
+        userRef.set(user)
+            .addOnSuccessListener {
+                Toast.makeText(context, "Cliente agregado satisfactoriamente!", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(context, "Error al agregar el cliente.", Toast.LENGTH_SHORT).show()
+            }
+    }
 
 }
