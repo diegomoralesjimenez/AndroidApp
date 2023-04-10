@@ -50,17 +50,17 @@
                 android:layout_marginBottom="5dp"
                 android:background="#EE000000"
                 android:backgroundTint="#75E6E4E4"
+                android:clickable="false"
                 android:editable="false"
                 android:ems="10"
+                android:focusable="false"
                 android:fontFamily="@font/roboto_medium"
                 android:hint="Salario"
                 android:inputType="number"
                 android:paddingLeft="25dp"
-                android:textColor="#000000"
+                android:textColor="#7C000000"
                 android:textColorHint="#7C000000"
-                android:textSize="14sp"
-                android:focusable="false"
-                android:clickable="false"/>
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -74,7 +74,7 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/editTextPrestamo"
+                android:id="@+id/prestamo"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 android:layout_marginBottom="20dp"
@@ -260,12 +260,13 @@
                 android:layout_marginBottom="25dp"
                 android:background="#EE000000"
                 android:backgroundTint="#75E6E4E4"
+                android:clickable="false"
                 android:ems="10"
                 android:fontFamily="@font/roboto_medium"
                 android:hint="7.5%"
                 android:inputType="number"
                 android:paddingLeft="25dp"
-                android:textColor="#000000"
+                android:textColor="#7C000000"
                 android:textColorHint="#7C000000"
                 android:textSize="14sp" />
 

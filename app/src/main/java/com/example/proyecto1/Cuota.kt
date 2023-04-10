@@ -37,6 +37,7 @@ class Cuota : Fragment() {
                 //Get a los valores de la coleccion
                 val salario = documentSnapshot.getDouble("Salario")
                 salarioView.setText(salario.toString())
+
             }
         }
 
