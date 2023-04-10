@@ -78,10 +78,10 @@ class NewClient : Fragment() {
 
             userRef.set(user)
                 .addOnSuccessListener {
-                    Toast.makeText(context, "User added", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Cliente agregado satisfactoriamente!", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(context, "Failed to add user", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Error al agregar el cliente.", Toast.LENGTH_SHORT).show()
                 }
         }
 

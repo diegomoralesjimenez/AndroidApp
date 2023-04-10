@@ -46,9 +46,10 @@
                     android:layout_gravity="end"
                     android:background="@null"
                     android:elevation="0dp"
-                    android:text="Sign Out"
+                    android:text="Salir"
                     android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    tools:ignore="HardcodedText" />
 
             </androidx.appcompat.widget.Toolbar>
 
