@@ -94,15 +94,16 @@ class newClient : Fragment() {
                 .addOnSuccessListener {
                     val clienteId = userRef.id
 
-// Crear la colección de préstamos dentro del documento
+            // Crear la colección de préstamos dentro del documento
                     val prestamosRef =
                         db.collection("Users").document(clienteId).collection("Prestamos")
 
-// Agregar un préstamo a la colección de préstamos
+            // Agregar un préstamo a la colección de préstamos
                     val prestamo = hashMapOf(
                         "Monto" to "500000",
                         "Tipo" to "Hipotecario",
-                        "Meses" to "12"
+                        "Meses" to "12",
+                        "TasaInteres" to "7.5"
                     )
 
                     prestamosRef.add(prestamo)

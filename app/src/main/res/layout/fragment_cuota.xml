@@ -22,7 +22,7 @@
             android:paddingBottom="95dp">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/txtTitulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_black"
@@ -253,7 +253,7 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/editTextNumber3"
+                android:id="@+id/txtTasaInteres"
                 android:layout_width="326dp"
                 android:layout_height="47dp"
                 android:layout_marginTop="5dp"
@@ -271,7 +271,7 @@
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/button11"
+                android:id="@+id/btnAgregar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#000000"
