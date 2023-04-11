@@ -2,7 +2,6 @@ package com.example.proyecto1
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -93,8 +92,36 @@ class newClient : Fragment() {
 
             userRef.set(user)
                 .addOnSuccessListener {
-                    Toast.makeText(context, "Cliente agregado satisfactoriamente!", Toast.LENGTH_SHORT)
-                        .show()
+                    val clienteId = userRef.id
+
+// Crear la colección de préstamos dentro del documento
+                    val prestamosRef =
+                        db.collection("Users").document(clienteId).collection("Prestamos")
+
+// Agregar un préstamo a la colección de préstamos
+                    val prestamo = hashMapOf(
+                        "Monto" to "500000",
+                        "Tipo" to "Hipotecario",
+                        "Meses" to "12"
+                    )
+
+                    prestamosRef.add(prestamo)
+                        .addOnSuccessListener {
+                            Toast.makeText(
+                                context,
+                                "Cliente y préstamo agregados satisfactoriamente!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(
+                                context,
+                                "Error al agregar el préstamo.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+                    Toast.makeText(context, "Cliente agregado satisfactoriamente!", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {
                     Toast.makeText(context, "Error al agregar el cliente.", Toast.LENGTH_SHORT).show()
