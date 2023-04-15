@@ -5,55 +5,67 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import java.text.NumberFormat
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Ahorro.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Ahorro : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var navidenoView: TextView;
+    private lateinit var escolarView: TextView;
+    private lateinit var marchamoView: TextView;
+    private lateinit var extraordinarioView: TextView;
+
+
+    private lateinit var db: FirebaseFirestore
+    private lateinit var userId: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ahorro, container, false)
-    }
+        val view = inflater.inflate(R.layout.fragment_ahorro, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Ahorro.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Ahorro().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        // Firestore y Firebase inicializado
+        db = FirebaseFirestore.getInstance()
+        userId = FirebaseAuth.getInstance().currentUser!!.uid
+
+
+        navidenoView = view.findViewById(R.id.montoNavideno)
+        escolarView = view.findViewById(R.id.montoEscolar)
+        marchamoView = view.findViewById(R.id.montoMarchamo)
+        extraordinarioView = view.findViewById(R.id.montoExtraordinario)
+
+
+        val navidenoDocRef = db.collection("Users").document(userId)
+            .collection("Ahorro").document("Navideno")
+
+
+        navidenoDocRef.get().addOnSuccessListener { documentSnapshot ->
+            if (documentSnapshot.exists()) {
+                val montoNavideno = documentSnapshot.getDouble("montoNavideno")
+                //val montoEscolar= documentSnapshot.getDouble("montoEscolar")
+               // val montoMarchamo = documentSnapshot.getDouble("montoMarchamo")
+                //val montoExtraordinario =  documentSnapshot.getDouble("montoExtraordinario")
+
+                val formattedMontoNavideno = NumberFormat.getCurrencyInstance(Locale("es", "CR")).format(montoNavideno)
+               // val formattedMontoEscolar = NumberFormat.getCurrencyInstance(Locale("es", "CR")).format(montoEscolar)
+              //  val formattedMontoMarchamo = NumberFormat.getCurrencyInstance(Locale("es", "CR")).format(montoMarchamo)
+               // val formattedMontoExtraordinario = NumberFormat.getCurrencyInstance(Locale("es", "CR")).format(montoExtraordinario)
+                navidenoView.text = formattedMontoNavideno
+               // escolarView.text = formattedMontoEscolar
+               // marchamoView.text =  formattedMontoMarchamo
+                //extraordinarioView.text =  formattedMontoExtraordinario
             }
+        }
+
+
+
+        return view
     }
 }

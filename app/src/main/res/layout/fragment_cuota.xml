@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whiteClear"
-    tools:context=".Cuota">
+    tools:context=".Cuota"
+    android:id="@+id/fragment_cuota">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -114,7 +115,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button71"
+                    android:id="@+id/buttonH"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -124,7 +125,7 @@
                     android:text="H" />
 
                 <Button
-                    android:id="@+id/button81"
+                    android:id="@+id/buttonE"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -135,7 +136,7 @@
                     android:text="E" />
 
                 <Button
-                    android:id="@+id/button91"
+                    android:id="@+id/buttonV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -146,7 +147,7 @@
                     android:text="V" />
 
                 <Button
-                    android:id="@+id/button101"
+                    android:id="@+id/buttonO"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -271,7 +272,7 @@
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/btnAgregar"
+                android:id="@+id/calcular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#000000"
