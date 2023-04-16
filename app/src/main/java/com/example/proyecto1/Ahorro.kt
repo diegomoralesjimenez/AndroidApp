@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.NumberFormat
@@ -19,6 +22,8 @@ class Ahorro : Fragment() {
     private lateinit var escolarView: TextView;
     private lateinit var marchamoView: TextView;
     private lateinit var extraordinarioView: TextView;
+
+    private lateinit var ahorroBtn: Button;
 
 
     private lateinit var db: FirebaseFirestore
@@ -41,27 +46,35 @@ class Ahorro : Fragment() {
         marchamoView = view.findViewById(R.id.montoMarchamo)
         extraordinarioView = view.findViewById(R.id.montoExtraordinario)
 
-
-        val navidenoDocRef = db.collection("Users").document(userId)
-            .collection("Ahorro").document("Navideno")
+        ahorroBtn = view.findViewById(R.id.ahorroBtn)
 
 
-        navidenoDocRef.get().addOnSuccessListener { documentSnapshot ->
-            if (documentSnapshot.exists()) {
-                val montoNavideno = documentSnapshot.getDouble("montoNavideno")
-                //val montoEscolar= documentSnapshot.getDouble("montoEscolar")
-               // val montoMarchamo = documentSnapshot.getDouble("montoMarchamo")
-                //val montoExtraordinario =  documentSnapshot.getDouble("montoExtraordinario")
+        val savingsTypes = arrayOf("Navideno", "Escolar", "Marchamo", "Extraordinario")
+        val savingsViews = arrayOf(navidenoView, escolarView, marchamoView, extraordinarioView)
 
-                val formattedMontoNavideno = NumberFormat.getCurrencyInstance(Locale("es", "CR")).format(montoNavideno)
-               // val formattedMontoEscolar = NumberFormat.getCurrencyInstance(Locale("es", "CR")).format(montoEscolar)
-              //  val formattedMontoMarchamo = NumberFormat.getCurrencyInstance(Locale("es", "CR")).format(montoMarchamo)
-               // val formattedMontoExtraordinario = NumberFormat.getCurrencyInstance(Locale("es", "CR")).format(montoExtraordinario)
-                navidenoView.text = formattedMontoNavideno
-               // escolarView.text = formattedMontoEscolar
-               // marchamoView.text =  formattedMontoMarchamo
-                //extraordinarioView.text =  formattedMontoExtraordinario
+        for (i in savingsTypes.indices) {
+            val savingsType = savingsTypes[i]
+            val savingsView = savingsViews[i]
+
+            val savingsDocRef = db.collection("Users").document(userId)
+                .collection("Ahorro").document(savingsType)
+
+            savingsDocRef.get().addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val savingsValue = documentSnapshot.getDouble("monto$savingsType")
+                    val formattedSavingsValue = NumberFormat.getCurrencyInstance(Locale("es", "CR")).format(savingsValue)
+                    savingsView.text = formattedSavingsValue
+                }
             }
+        }
+
+        ahorroBtn.setOnClickListener {
+            val newFragment = AhorroProgramado()
+
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_ahorro, newFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
 
 
