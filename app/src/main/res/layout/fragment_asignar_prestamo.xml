@@ -59,6 +59,34 @@
                 tools:ignore="Autofill,DuplicateSpeakableTextCheck,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck" />
 
             <TextView
+                android:id="@+id/textView20"
+                android:layout_width="326dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Nombre del Cliente"
+                android:textAlignment="textStart"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/txtNombreCliente"
+                android:layout_width="326dp"
+                android:layout_height="48dp"
+                android:background="#EE000000"
+                android:backgroundTint="#75E6E4E4"
+                android:ems="10"
+                android:fontFamily="@font/roboto_medium"
+                android:hint="Nombre del cliente"
+                android:inputType="text"
+                android:paddingLeft="25dp"
+                android:textColor="#000000"
+                android:textColorHint="#7C000000"
+                android:textSize="14sp"
+                tools:ignore="Autofill,DuplicateSpeakableTextCheck,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck" />
+
+            <TextView
                 android:id="@+id/textView13"
                 android:layout_width="326dp"
                 android:layout_height="wrap_content"
@@ -94,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Prestamo"
+                android:text="Monto del prestamo"
                 android:textAlignment="textStart"
                 android:textColor="#000000"
                 android:textSize="16sp"
@@ -132,45 +160,53 @@
                 tools:ignore="HardcodedText,InefficientWeight" />
 
 
-            <LinearLayout
-                android:id="@+id/rgCredito"
+            <RadioGroup
+                android:id="@+id/radioGCredito"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:ignore="TextSizeCheck">
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
-                <RadioButton
-                    android:id="@+id/btnHipotecario"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/rgCredito"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Hipotecario"
-                    tools:ignore="DuplicateSpeakableTextCheck,HardcodedText" />
+                    android:orientation="horizontal"
+                    tools:ignore="TextSizeCheck">
 
-                <RadioButton
-                    android:id="@+id/btnEducativo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Educativo"
-                    tools:ignore="HardcodedText" />
+                    <RadioButton
+                        android:id="@+id/btnHipotecario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Hipotecario"
+                        tools:ignore="DuplicateSpeakableTextCheck,HardcodedText" />
 
-                <RadioButton
-                    android:id="@+id/btnViajes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Viajes"
-                    tools:ignore="HardcodedText" />
+                    <RadioButton
+                        android:id="@+id/btnEducativo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Educativo"
+                        tools:ignore="HardcodedText" />
 
-                <RadioButton
-                    android:id="@+id/btnPersonal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Personal"
-                    tools:ignore="HardcodedText" />
-            </LinearLayout>
+                    <RadioButton
+                        android:id="@+id/btnViajes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Viajes"
+                        tools:ignore="HardcodedText" />
+
+                    <RadioButton
+                        android:id="@+id/btnPersonal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Personal"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+
+            </RadioGroup>
 
             <LinearLayout
                 android:layout_width="325dp"
@@ -205,38 +241,44 @@
                     tools:ignore="HardcodedText" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/rgDuracion"
-                android:layout_width="328dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:ignore="TextSizeCheck">
+            <RadioGroup
+                android:id="@+id/radioGDuracion"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
 
-                <RadioButton
-                    android:id="@+id/btnTres"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/rgDuracion"
+                    android:layout_width="328dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="3"
-                    tools:ignore="HardcodedText" />
+                    android:orientation="horizontal"
+                    tools:ignore="TextSizeCheck">
 
-                <RadioButton
-                    android:id="@+id/btnCinco"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="5"
-                    tools:ignore="HardcodedText" />
+                    <RadioButton
+                        android:id="@+id/btnTres"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="3"
+                        tools:ignore="HardcodedText" />
 
-                <RadioButton
-                    android:id="@+id/btnDiez"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="10"
-                    tools:ignore="HardcodedText" />
+                    <RadioButton
+                        android:id="@+id/btnCinco"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="5"
+                        tools:ignore="HardcodedText" />
 
-            </LinearLayout>
+                    <RadioButton
+                        android:id="@+id/btnDiez"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="10"
+                        tools:ignore="HardcodedText" />
+
+                </LinearLayout>
+            </RadioGroup>
 
             <TextView
                 android:id="@+id/textView16"
@@ -261,6 +303,36 @@
                 android:ems="10"
                 android:fontFamily="@font/roboto_medium"
                 android:hint="7.5%"
+                android:inputType="number"
+                android:paddingLeft="25dp"
+                android:textColor="#000000"
+                android:textColorHint="#7C000000"
+                android:textSize="14sp"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck,TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="326dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Monto Mensual a cancelar"
+                android:textAlignment="textStart"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/txtMontoMensual"
+                android:layout_width="326dp"
+                android:layout_height="47dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="25dp"
+                android:background="#EE000000"
+                android:backgroundTint="#75E6E4E4"
+                android:ems="10"
+                android:fontFamily="@font/roboto_medium"
+                android:hint="0.0"
                 android:inputType="number"
                 android:paddingLeft="25dp"
                 android:textColor="#000000"

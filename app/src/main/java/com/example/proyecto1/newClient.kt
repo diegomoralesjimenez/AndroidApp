@@ -75,8 +75,13 @@ class newClient : Fragment() {
 
             val newSalario = salarioTextView.text.toString()
 
+            /*
+            Para renderizar todo menos el tipo
+            val data = db.collection("Prestamos").whereNotEqualTo("Tipo","Inicio")
+            println(data);
+            */
 
-            //Coleccion
+            // Coleccion
             val userRef = db.collection("Users").document()
 
             //Creacion de los valores de la coleccion
@@ -100,10 +105,10 @@ class newClient : Fragment() {
 
             // Agregar un préstamo a la colección de préstamos
                     val prestamo = hashMapOf(
-                        "Monto" to "500000",
-                        "Tipo" to "Hipotecario",
-                        "Meses" to "12",
-                        "TasaInteres" to "7.5"
+                        "Monto" to "0",
+                        "Tipo" to "Inicio",
+                        "Meses" to "0",
+                        "TasaInteres" to "0"
                     )
 
                     prestamosRef.add(prestamo)
