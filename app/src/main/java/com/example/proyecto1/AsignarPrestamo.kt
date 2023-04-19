@@ -12,6 +12,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.math.pow
@@ -68,6 +69,8 @@ class AsignarPrestamo : Fragment() {
     }
 
     fun insertar(view: View) {
+        // se podria agregar el atributo "document: DocumentSnapshot" en el metodo, se trae
+        // el cliente como parametro del metodo "buscarClientePorCedula"
 
         if (validarAtributos()) {
 
@@ -81,12 +84,12 @@ class AsignarPrestamo : Fragment() {
                     // Iterar sobre los documentos obtenidos (debería haber solo uno)
                     for (document in documents) {
 
-                        val nombre = document.getString("Nombre")
-                        val salario = document.getDouble("Salario")
+                        val newNombre = document.getString("Nombre")
+                        val salario = document.getLong("Salario")?.toInt()
 
-                        val newNombre = nombreTextView.text.toString()
-                        val newSalario = salarioTextView.text.toString()
-                        var salarioNumerico = newSalario.toInt()
+                        nombreTextView.text = newNombre
+                        val newSalario = salario
+                        var salarioNumerico = newSalario
 
                         // Debemos limitar el prestamo al 45% del salario
                         val newMontoPrest = montoPrestamo.text.toString()
@@ -94,14 +97,16 @@ class AsignarPrestamo : Fragment() {
                         lateinit var newMonto: String
 
 
-                        if (montoIngresado > salarioNumerico * 0.45) {
-                            Toast.makeText(
-                                context,
-                                "El monto debe ser menor al 45% del salario.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            newMonto = montoIngresado.toString()
+                        if (salarioNumerico != null) {
+                            if (montoIngresado > salarioNumerico * 0.45) {
+                                Toast.makeText(
+                                    context,
+                                    "El monto debe ser menor al 45% del salario.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                newMonto = montoIngresado.toString()
+                            }
                         }
 
                         // Captura informacion desde los RadioGroup Tipo de Credito
@@ -198,18 +203,13 @@ class AsignarPrestamo : Fragment() {
         }
     }
 
-    fun insertarPrestamo(clienteId: String, prestamo: HashMap<String, Any>) {
-        // Obtener una referencia al documento del cliente existente
-        val userRef = db.collection("Users").document(clienteId)
-
-        // Utilizar el método "update" para agregar el objeto HashMap a la colección "Prestamos" del cliente
-        userRef.update("Prestamos", FieldValue.arrayUnion(prestamo))
-            .addOnSuccessListener {
-                Toast.makeText(context, "Préstamo agregado correctamente", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(context, "Error al agregar el préstamo", Toast.LENGTH_SHORT).show()
-            }
+    fun buscarClientePorCedula(db: FirebaseFirestore, cedula: String): DocumentSnapshot? {
+        val query = db.collection("Users").whereEqualTo("Cedula", cedula)
+        val querySnapshot = query.get().result
+        if (querySnapshot?.documents?.isNotEmpty() == true) {
+            return querySnapshot.documents[0]
+        }
+        return null
     }
 
     private fun validarAtributos(): Boolean {
@@ -220,6 +220,8 @@ class AsignarPrestamo : Fragment() {
                 (duracionPrestamo != null && duracionPrestamo!!.checkedRadioButtonId != -1) &&
                 (tipoCredito != null && tipoCredito!!.checkedRadioButtonId != -1)
     }
+
+
 
 
 
