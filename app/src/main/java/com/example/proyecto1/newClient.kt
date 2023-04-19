@@ -105,10 +105,14 @@ class newClient : Fragment() {
 
             // Agregar un préstamo a la colección de préstamos
                     val prestamo = hashMapOf(
-                        "Monto" to "0",
-                        "Tipo" to "Inicio",
-                        "Meses" to "0",
-                        "TasaInteres" to "0"
+                        "Cedula" to "",
+                        "Nombre" to "",
+                        "Salario" to "",
+                        "MontoPrestamo" to "",
+                        "TipoCredito" to "Inicio",
+                        "DuracionPrestamo" to "",
+                        "TasaInteres" to "",
+                        "MontoMensual" to ""
                     )
 
                     prestamosRef.add(prestamo)

@@ -12,11 +12,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:paddingRight="10dp"
+            tools:ignore="ScrollViewSize">
 
             <TextView
                 android:id="@+id/txtTitulo"
@@ -77,6 +78,7 @@
                 android:background="#EE000000"
                 android:backgroundTint="#75E6E4E4"
                 android:ems="10"
+                android:focusable="false"
                 android:fontFamily="@font/roboto_medium"
                 android:hint="Nombre del cliente"
                 android:inputType="text"
@@ -91,6 +93,7 @@
                 android:layout_width="326dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:focusable="false"
                 android:fontFamily="@font/roboto_medium"
                 android:text="Salario"
                 android:textAlignment="textStart"
@@ -107,6 +110,7 @@
                 android:background="#EE000000"
                 android:backgroundTint="#75E6E4E4"
                 android:ems="10"
+                android:focusable="false"
                 android:fontFamily="@font/roboto_medium"
                 android:hint="Salario"
                 android:inputType="number"
@@ -179,7 +183,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Hipotecario"
-                        tools:ignore="DuplicateSpeakableTextCheck,HardcodedText" />
+                        tools:ignore="DuplicateSpeakableTextCheck,HardcodedText,VisualLintButtonSize" />
 
                     <RadioButton
                         android:id="@+id/btnEducativo"
@@ -187,7 +191,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Educativo"
-                        tools:ignore="HardcodedText" />
+                        tools:ignore="HardcodedText,VisualLintButtonSize" />
 
                     <RadioButton
                         android:id="@+id/btnViajes"
@@ -195,7 +199,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Viajes"
-                        tools:ignore="HardcodedText" />
+                        tools:ignore="HardcodedText,VisualLintButtonSize" />
 
                     <RadioButton
                         android:id="@+id/btnPersonal"
@@ -203,7 +207,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Personal"
-                        tools:ignore="HardcodedText" />
+                        tools:ignore="HardcodedText,VisualLintButtonSize" />
                 </LinearLayout>
 
             </RadioGroup>
@@ -301,6 +305,7 @@
                 android:background="#EE000000"
                 android:backgroundTint="#75E6E4E4"
                 android:ems="10"
+                android:focusable="false"
                 android:fontFamily="@font/roboto_medium"
                 android:hint="7.5%"
                 android:inputType="number"
@@ -331,6 +336,7 @@
                 android:background="#EE000000"
                 android:backgroundTint="#75E6E4E4"
                 android:ems="10"
+                android:focusable="false"
                 android:fontFamily="@font/roboto_medium"
                 android:hint="0.0"
                 android:inputType="number"
