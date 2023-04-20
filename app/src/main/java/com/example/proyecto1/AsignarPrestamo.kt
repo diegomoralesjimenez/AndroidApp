@@ -2,6 +2,7 @@ package com.example.proyecto1
 
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -19,22 +20,28 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.Objects
 import kotlin.math.pow
 
 class AsignarPrestamo : Fragment() {
 
+    // TextView
     private lateinit var cedulaTextView: TextView
     private lateinit var nombreTextView: TextView
     private lateinit var salarioTextView: TextView
     private lateinit var montoPrestamo: TextView
-    private var tipoCredito: RadioGroup? = null
-    lateinit var btnTipoCredito: RadioButton
+    private lateinit var tasaInteres: TextView
+    private lateinit var newMontoMensual: TextView
+
+    //Botones
+    private lateinit var btnHipo : Button
+    private lateinit var btnEduca : Button
+    private lateinit var btnPersonal : Button
+    private lateinit var btnViaje : Button
     private var duracionPrestamo: RadioGroup? = null
     lateinit var btnDuracionPrestamo: RadioButton
-    private lateinit var tasaInteres: TextView
-    private lateinit var montoMensual: TextView
 
-
+    //Base de Datos
     private lateinit var db: FirebaseFirestore
     private lateinit var userId: String
 
@@ -58,15 +65,31 @@ class AsignarPrestamo : Fragment() {
         salarioTextView = view.findViewById(R.id.txtSalario)
         montoPrestamo = view.findViewById(R.id.txtPrestamo)
         tasaInteres = view.findViewById(R.id.txtTasaInteres)
-        montoMensual = view.findViewById(R.id.txtMontoMensual)
+        newMontoMensual = view.findViewById(R.id.txtMontoMensual)
 
-        tipoCredito = view.findViewById(R.id.radioGCredito)
+        btnHipo = view.findViewById(R.id.btnHipotecario)
+        btnEduca = view.findViewById(R.id.btnEducativo)
+        btnPersonal = view.findViewById(R.id.btnPersonal)
+        btnViaje = view.findViewById(R.id.btnViajes)
         duracionPrestamo = view.findViewById(R.id.radioGDuracion)
-
 
         val addButton = view.findViewById<Button>(R.id.btnAgregar)
         addButton.setOnClickListener {
-            insertar(view)
+
+            db.collection("Users")
+                .whereEqualTo("Cedula", cedulaTextView.text.toString())
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    for (document in querySnapshot.documents) {
+                        val userId = document.id
+                        insertar(view, userId)
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.e(TAG, "Error al obtener el usuario con cédula 123", exception)
+                }
+
+        //insertar(view)
         }
 
         cedulaTextView.addTextChangedListener(object : TextWatcher {
@@ -101,151 +124,103 @@ class AsignarPrestamo : Fragment() {
         })
 
 
+        fun setInterestRate(interestRate: String, button: Button) {
+            tasaInteres.setText(interestRate)
+            if (button.currentTextColor != Color.BLACK) {
+                button.setTextColor(Color.BLACK)
+            }
+        }
+
+        btnHipo.setOnClickListener { setInterestRate("7.5", it as Button) }
+        btnEduca.setOnClickListener { setInterestRate("8", it as Button) }
+        btnViaje.setOnClickListener { setInterestRate("10", it as Button) }
+        btnPersonal.setOnClickListener { setInterestRate("12", it as Button) }
+
+
         return view
     }
 
-    fun insertar(view: View) {
-        // se podria agregar el atributo "document: DocumentSnapshot" en el metodo, se trae
-        // el cliente como parametro del metodo "buscarClientePorCedula"
-
+    fun insertar(view: View, userId: String) {
         if (validarAtributos()) {
-
+            // Completamos las variables
             val newCedula = cedulaTextView.text.toString()
-
-// ********************************************************************************************************
-            db.collection("Users")
-                .whereEqualTo("Cedula", newCedula)
-                .get()
-                .addOnSuccessListener { documents ->
-                    // Iterar sobre los documentos obtenidos (debería haber solo uno)
-                    for (document in documents) {
-
-                        val newNombre = document.getString("Nombre")
-                        val salario = document.getLong("Salario")?.toInt()
-
-                        nombreTextView.text = newNombre
-                        val newSalario = salario
-                        var salarioNumerico = newSalario
-
-                        // Debemos limitar el prestamo al 45% del salario
-                        val newMontoPrest = montoPrestamo.text.toString()
-                        val montoIngresado = newMontoPrest.toInt()
-                        lateinit var newMonto: String
+            val newNombre = nombreTextView.text.toString()
+            val newSalario = salarioTextView.text.toString()
+            val newMontoPrest = montoPrestamo.text.toString()
 
 
-                        if (salarioNumerico != null) {
-                            if (montoIngresado > salarioNumerico * 0.45) {
-                                Toast.makeText(
-                                    context,
-                                    "El monto debe ser menor al 45% del salario.",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            } else {
-                                newMonto = montoIngresado.toString()
-                            }
-                        }
+            lateinit var newTipodeCredito: String
+            if (tasaInteres.text.toString() == "7.5") {
+                newTipodeCredito = "Hipotecario"
+            } else if (tasaInteres.text.toString() == "8") {
+                newTipodeCredito = "Educacion"
+            } else if (tasaInteres.text.toString() == "10") {
+                newTipodeCredito = "Personal"
+            } else if (tasaInteres.text.toString() == "7.5") {
+                newTipodeCredito = "Viajes"
+            }
 
-                        // Captura informacion desde los RadioGroup Tipo de Credito
-                        val opcionTipoCredito: Int = tipoCredito!!.checkedRadioButtonId
-                        btnTipoCredito = view.findViewById(opcionTipoCredito)
-                        val newTipoCred = btnTipoCredito.text.toString()
+            val tipoCredit = newTipodeCredito
 
-                        // Captura informacion desde los RadioGroup Duracion del Prestamo
-                        val opcionDuracionPrest: Int = tipoCredito!!.checkedRadioButtonId
-                        btnDuracionPrestamo = view.findViewById(opcionDuracionPrest)
-                        val newDuracPrest = btnDuracionPrestamo.text.toString()
+            // Captura informacion desde los RadioGroup Duracion del Prestamo
+            val opcionDuracionPrest: Int = duracionPrestamo!!.checkedRadioButtonId
+            btnDuracionPrestamo = view.findViewById(opcionDuracionPrest)
+            val newDuracPrest = btnDuracionPrestamo.text.toString()
 
-                        //ESTOS SON EDITADOS POR EL ADMINISTRADOR
-                        lateinit var newtasaInteres: String
-                        if (newTipoCred == "Hipotecario") {
-                            tasaInteres.setText("7.5%")
-                            newtasaInteres = tasaInteres.text.toString()
-                        } else if (newTipoCred == "Educacion") {
-                            tasaInteres.setText("8%")
-                            newtasaInteres = tasaInteres.text.toString()
-                        } else if (newTipoCred == "Personal") {
-                            tasaInteres.setText("10%")
-                            newtasaInteres = tasaInteres.text.toString()
-                        } else if (newTipoCred == "Viajes") {
-                            tasaInteres.setText("12%")
-                            newtasaInteres = tasaInteres.text.toString()
-                        }
-
-                        lateinit var cuotaMensual: String
-                        val newMontoNumerico = newMonto.toInt()
-                        lateinit var numCuotas: String
-                        if (newDuracPrest == "3") {
-                            numCuotas = "36"
-                        } else if (newDuracPrest == "5") {
-                            numCuotas = "60"
-                        } else if (newDuracPrest == "10") {
-                            numCuotas = "120"
-                        }
-
-                        val numCuotasNumerico = numCuotas.toInt()
-                        if (newtasaInteres == "7.5%") {
-                            cuotaMensual =
-                                (((newMontoNumerico * 0.075) / (1 - (1 + 0.075).pow(numCuotasNumerico))).toString())
-                        } else if (newtasaInteres == "8%") {
-                            cuotaMensual =
-                                (((newMontoNumerico * 0.8) / (1 - (1 + 0.8).pow(numCuotasNumerico))).toString())
-                        } else if (newtasaInteres == "10%") {
-                            cuotaMensual =
-                                (((newMontoNumerico * 0.1) / (1 - (1 + 0.1).pow(numCuotasNumerico))).toString())
-                        } else if (newtasaInteres == "12%") {
-                            cuotaMensual =
-                                (((newMontoNumerico * 0.12) / (1 - (1 + 0.12).pow(numCuotasNumerico))).toString())
-                        }
-
-                        montoMensual.text = cuotaMensual
+            //ESTOS SON EDITADOS POR EL ADMINISTRADOR
+            var newtasaInteres = tasaInteres.text.toString()
 
 
-                        // Obtener el ID del usuario
-                        val usuarioId = document.id
+            // Calculo de cuota mensual
+            lateinit var numCuotas: String
+            if (newDuracPrest == "3") {
+                numCuotas = "36"
+            } else if (newDuracPrest == "5") {
+                numCuotas = "60"
+            } else if (newDuracPrest == "10") {
+                numCuotas = "120"
+            }
 
-                        val prestamo = hashMapOf(
-                            "Cedula" to newCedula,
-                            "Nombre" to newNombre,
-                            "Salario" to newSalario,
-                            "MontoPrestamo" to newMonto,
-                            "TipoCredito" to newTipoCred,
-                            "DuracionPrestamo" to newDuracPrest,
-                            "TasaInteres" to newtasaInteres,
-                            "MontoMensual" to cuotaMensual
-                        )
+            val numCuotasNumerico = numCuotas.toInt()
+            newMontoMensual.setText(calculaCuota(newtasaInteres, newMontoPrest.toInt(), numCuotasNumerico))
+            val newMontoMensualNum = newMontoMensual.toString()
 
-                        db.collection("Users").document(usuarioId)
-                            .collection("Prestamos").add(prestamo)
-                            .addOnSuccessListener {
-                                Toast.makeText(
-                                    context,
-                                    "Prestamo agregado exitosamente",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                            .addOnFailureListener {
-                                Toast.makeText(
-                                    context,
-                                    "Error al agregar el prestamo",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                    }
+
+            // Coleccion
+            val prestamosRef = db.collection("Users").document(userId).collection("Prestamos")
+
+            // Agregar un préstamo a la colección de préstamos
+            val prestamo = hashMapOf(
+                "Cedula" to newCedula,
+                "Nombre" to newNombre,
+                "Salario" to newSalario,
+                "MontoPrestamo" to newMontoPrest,
+                "TipoCredito" to tipoCredit,
+                "DuracionPrestamo" to newDuracPrest,
+                "TasaInteres" to newtasaInteres,
+                "MontoMensual" to newMontoMensualNum
+            )
+
+            prestamosRef.add(prestamo)
+                .addOnSuccessListener {
+                    Toast.makeText(
+                        context,
+                        "Préstamo agregado satisfactoriamente!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
-// ********************************************************************************************************
+                .addOnFailureListener {
+                    Toast.makeText(
+                        context,
+                        "Error al agregar el préstamo.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
 
+            Toast.makeText(context, "Préstamo agregado satisfactoriamente!", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(context, "Todos los espacios deben llenarse.", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    fun buscarClientePorCedula(db: FirebaseFirestore, cedula: String): DocumentSnapshot? {
-        val query = db.collection("Users").whereEqualTo("Cedula", cedula)
-        val querySnapshot = query.get().result
-        if (querySnapshot?.documents?.isNotEmpty() == true) {
-            return querySnapshot.documents[0]
-        }
-        return null
     }
 
     private fun validarAtributos(): Boolean {
@@ -253,12 +228,26 @@ class AsignarPrestamo : Fragment() {
                 !nombreTextView.text.isEmpty() &&
                 !salarioTextView.text.isEmpty() &&
                 !montoPrestamo.text.isEmpty() &&
-                (duracionPrestamo != null && duracionPrestamo!!.checkedRadioButtonId != -1) &&
-                (tipoCredito != null && tipoCredito!!.checkedRadioButtonId != -1)
+                (duracionPrestamo != null && duracionPrestamo!!.checkedRadioButtonId != -1)
+                //(tipoCredito != null && tipoCredito!!.checkedRadioButtonId != -1)
     }
 
-
-
-
+    private fun calculaCuota(newtasaInteres : String, newMontoMensualNum : Int, numCuotasNumerico : Int): String {
+        lateinit var cuotaMensual : String
+        if (newtasaInteres == "7.5") {
+            cuotaMensual =
+                (((newMontoMensualNum * 0.075) / (1 - (1 + 0.075).pow(numCuotasNumerico))).toString())
+        } else if (newtasaInteres == "8") {
+            cuotaMensual =
+                (((newMontoMensualNum * 0.8) / (1 - (1 + 0.8).pow(numCuotasNumerico))).toString())
+        } else if (newtasaInteres == "10") {
+            cuotaMensual =
+                (((newMontoMensualNum * 0.1) / (1 - (1 + 0.1).pow(numCuotasNumerico))).toString())
+        } else if (newtasaInteres == "12") {
+            cuotaMensual =
+                (((newMontoMensualNum * 0.12) / (1 - (1 + 0.12).pow(numCuotasNumerico))).toString())
+        }
+        return cuotaMensual
+    }
 
 }

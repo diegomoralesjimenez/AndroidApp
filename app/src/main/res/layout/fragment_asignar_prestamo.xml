@@ -165,53 +165,67 @@
                 tools:ignore="HardcodedText,InefficientWeight" />
 
 
-            <RadioGroup
-                android:id="@+id/radioGCredito"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/rgCredito"
+                android:layout_width="321dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                tools:ignore="TextSizeCheck">
 
-                <LinearLayout
-                    android:id="@+id/rgCredito"
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/btnHipotecario"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    tools:ignore="TextSizeCheck">
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#FFFFFF"
+                    android:fontFamily="@font/roboto_black"
+                    android:text="H"
+                    android:textColor="#000000"
+                    tools:ignore="ButtonStyle,HardcodedText" />
 
-                    <RadioButton
-                        android:id="@+id/btnHipotecario"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Hipotecario"
-                        tools:ignore="DuplicateSpeakableTextCheck,HardcodedText,VisualLintButtonSize" />
+                <Button
+                    android:id="@+id/btnEducativo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#FFFFFF"
+                    android:fontFamily="@font/roboto_black"
+                    android:text="E"
+                    android:textColor="#000000"
+                    tools:ignore="ButtonStyle,HardcodedText" />
 
-                    <RadioButton
-                        android:id="@+id/btnEducativo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Educativo"
-                        tools:ignore="HardcodedText,VisualLintButtonSize" />
+                <Button
+                    android:id="@+id/btnViajes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#FFFFFF"
+                    android:fontFamily="@font/roboto_black"
+                    android:text="V"
+                    android:textColor="#000000"
+                    tools:ignore="ButtonStyle,HardcodedText" />
 
-                    <RadioButton
-                        android:id="@+id/btnViajes"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Viajes"
-                        tools:ignore="HardcodedText,VisualLintButtonSize" />
+                <Button
+                    android:id="@+id/btnPersonal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#FFFFFF"
+                    android:fontFamily="@font/roboto_black"
+                    android:text="P"
+                    android:textColor="#000000"
+                    tools:ignore="ButtonStyle,HardcodedText" />
+            </LinearLayout>
 
-                    <RadioButton
-                        android:id="@+id/btnPersonal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Personal"
-                        tools:ignore="HardcodedText,VisualLintButtonSize" />
-                </LinearLayout>
 
-            </RadioGroup>
 
             <LinearLayout
                 android:layout_width="325dp"
@@ -248,41 +262,29 @@
 
             <RadioGroup
                 android:id="@+id/radioGDuracion"
-                android:layout_width="wrap_content"
+                android:layout_width="322dp"
                 android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:id="@+id/rgDuracion"
-                    android:layout_width="328dp"
+                <RadioButton
+                    android:id="@+id/rd3Anios"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    tools:ignore="TextSizeCheck">
+                    android:text="3"
+                    tools:ignore="HardcodedText,VisualLintButtonSize" />
 
-                    <RadioButton
-                        android:id="@+id/btnTres"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="3"
-                        tools:ignore="HardcodedText" />
+                <RadioButton
+                    android:id="@+id/rd5Anios"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    tools:ignore="HardcodedText,VisualLintButtonSize" />
 
-                    <RadioButton
-                        android:id="@+id/btnCinco"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="5"
-                        tools:ignore="HardcodedText" />
-
-                    <RadioButton
-                        android:id="@+id/btnDiez"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="10"
-                        tools:ignore="HardcodedText" />
-
-                </LinearLayout>
+                <RadioButton
+                    android:id="@+id/rd10Anios"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    tools:ignore="HardcodedText,VisualLintButtonSize" />
             </RadioGroup>
 
             <TextView
