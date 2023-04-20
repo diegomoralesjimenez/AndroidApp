@@ -1,7 +1,11 @@
 package com.example.proyecto1
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -64,6 +68,38 @@ class AsignarPrestamo : Fragment() {
         addButton.setOnClickListener {
             insertar(view)
         }
+
+        cedulaTextView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // When the user types in the cedula, query the database for the user information
+                val usersRef = db.collection("Users")
+                val query = usersRef.whereEqualTo("Cedula", s.toString())
+                query.get().addOnSuccessListener { querySnapshot ->
+                    if (querySnapshot.size() > 0) {
+                        // The user exists, so retrieve their information
+                        val documentSnapshot = querySnapshot.documents[0]
+                        val nombre = documentSnapshot.getString("Nombre")
+                        val salario = documentSnapshot.getDouble("Salario")
+                        nombreTextView.setText(nombre)
+                        salarioTextView.setText(salario.toString())
+                    } else {
+                        // The user does not exist
+                        nombreTextView.setText("")
+                        salarioTextView.setText("No se encontró al usuario con la cédula especificada.")
+                    }
+                }.addOnFailureListener { exception ->
+                    // An error occurred while retrieving the user information
+                    Log.w(TAG, "Error getting user information.", exception)
+                    nombreTextView.setText("")
+                    salarioTextView.setText("Ocurrió un error al buscar al usuario.")
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
 
         return view
     }
