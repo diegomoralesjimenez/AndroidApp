@@ -47,12 +47,12 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/ahorroTotal"
                 android:layout_width="match_parent"
                 android:layout_height="19dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto_bold"
-                android:text="450.000"
+                android:text="0"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp" />
 

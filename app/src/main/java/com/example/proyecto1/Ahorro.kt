@@ -23,6 +23,9 @@ class Ahorro : Fragment() {
     private lateinit var marchamoView: TextView;
     private lateinit var extraordinarioView: TextView;
 
+    private lateinit var ahorroTotalView: TextView;
+
+
     private lateinit var ahorroBtn: Button;
 
 
@@ -46,11 +49,15 @@ class Ahorro : Fragment() {
         marchamoView = view.findViewById(R.id.montoMarchamo)
         extraordinarioView = view.findViewById(R.id.montoExtraordinario)
 
+        ahorroTotalView = view.findViewById(R.id.ahorroTotal)
+
         ahorroBtn = view.findViewById(R.id.ahorroBtn)
 
 
         val savingsTypes = arrayOf("Navideno", "Escolar", "Marchamo", "Extraordinario")
         val savingsViews = arrayOf(navidenoView, escolarView, marchamoView, extraordinarioView)
+
+        var ahorroTotalValue = 0.0 // create a variable to hold the total savings value
 
         for (i in savingsTypes.indices) {
             val savingsType = savingsTypes[i]
@@ -61,12 +68,17 @@ class Ahorro : Fragment() {
 
             savingsDocRef.get().addOnSuccessListener { documentSnapshot ->
                 if (documentSnapshot.exists()) {
-                    val savingsValue = documentSnapshot.getDouble("monto$savingsType")
+                    val savingsValue = documentSnapshot.getDouble("monto$savingsType") ?: 0.0
                     val formattedSavingsValue = NumberFormat.getCurrencyInstance(Locale("es", "CR")).format(savingsValue)
                     savingsView.text = formattedSavingsValue
+
+                    ahorroTotalValue += savingsValue // add the savings value to the total
+                    val formattedAhorroTotalValue = NumberFormat.getCurrencyInstance(Locale("es", "CR")).format(ahorroTotalValue)
+                    ahorroTotalView.text = formattedAhorroTotalValue // update the ahorroTotal TextView with the new total
                 }
             }
         }
+
 
         ahorroBtn.setOnClickListener {
             val newFragment = AhorroProgramado()
@@ -76,7 +88,6 @@ class Ahorro : Fragment() {
             transaction.addToBackStack(null)
             transaction.commit()
         }
-
 
 
         return view
