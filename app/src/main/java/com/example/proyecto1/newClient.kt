@@ -73,7 +73,7 @@ class newClient : Fragment() {
             estadoCiv = view.findViewById(opcionEstadoCiv)
             val newEstadoCiv = estadoCiv.text.toString()
 
-            val newSalario = salarioTextView.text.toString()
+            val newSalario = salarioTextView.text.toString().toInt()
 
             /*
             Para renderizar todo menos el tipo
@@ -83,6 +83,10 @@ class newClient : Fragment() {
 
             // Coleccion
             val userRef = db.collection("Users").document()
+
+            // La siguiente linea muestra como guardar con la cedula como identificador
+            //val prestamoRef = db.collection("Users").document(newCedula)
+            //                .collection("Prestamos").document()
 
             //Creacion de los valores de la coleccion
             val user = hashMapOf(

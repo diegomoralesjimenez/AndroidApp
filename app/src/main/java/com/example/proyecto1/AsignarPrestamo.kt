@@ -82,11 +82,11 @@ class AsignarPrestamo : Fragment() {
                 .addOnSuccessListener { querySnapshot ->
                     for (document in querySnapshot.documents) {
                         val userId = document.id
-                        insertar(view, userId)
+                        insertar(view)
                     }
                 }
                 .addOnFailureListener { exception ->
-                    Log.e(TAG, "Error al obtener el usuario con cédula 123", exception)
+                    Log.e(TAG, "Error al obtener el usuario con cédula", exception)
                 }
 
         //insertar(view)
@@ -140,7 +140,7 @@ class AsignarPrestamo : Fragment() {
         return view
     }
 
-    fun insertar(view: View, userId: String) {
+    fun insertar(view: View) {
         if (validarAtributos()) {
             // Completamos las variables
             val newCedula = cedulaTextView.text.toString()
@@ -149,7 +149,7 @@ class AsignarPrestamo : Fragment() {
             val newMontoPrest = montoPrestamo.text.toString()
 
 
-            lateinit var newTipodeCredito: String
+            var newTipodeCredito = ""
             if (tasaInteres.text.toString() == "7.5") {
                 newTipodeCredito = "Hipotecario"
             } else if (tasaInteres.text.toString() == "8") {
@@ -182,12 +182,12 @@ class AsignarPrestamo : Fragment() {
             }
 
             val numCuotasNumerico = numCuotas.toInt()
-            newMontoMensual.setText(calculaCuota(newtasaInteres, newMontoPrest.toInt(), numCuotasNumerico))
-            val newMontoMensualNum = newMontoMensual.toString()
-
+            newMontoMensual.setText(calculaCuota(newtasaInteres, newMontoPrest.toInt(), numCuotasNumerico).toString())
+            val newMontoMensualNum = newMontoMensual.text.toString()
 
             // Coleccion
-            val prestamosRef = db.collection("Users").document(userId).collection("Prestamos")
+            val userRef = db.collection("Users").whereEqualTo("Cedula",newCedula)
+
 
             // Agregar un préstamo a la colección de préstamos
             val prestamo = hashMapOf(
@@ -201,21 +201,29 @@ class AsignarPrestamo : Fragment() {
                 "MontoMensual" to newMontoMensualNum
             )
 
-            prestamosRef.add(prestamo)
-                .addOnSuccessListener {
-                    Toast.makeText(
-                        context,
-                        "Préstamo agregado satisfactoriamente!",
-                        Toast.LENGTH_SHORT
-                    ).show()
+            userRef.get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val documents = task.result?.documents
+                    if (documents != null && documents.isNotEmpty()) {
+                        val userDocRef = documents[0].reference
+                        val prestamosCollectionRef = userDocRef.collection("Prestamos")
+
+                        // Agregar el nuevo préstamo con el método add()
+                        prestamosCollectionRef.add(prestamo)
+                            .addOnSuccessListener {
+                                Log.d(TAG, "Prestamo agregado exitosamente")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e(TAG, "Error al agregar prestamo", e)
+                            }
+
+                    } else {
+                        Log.d(TAG, "No existe un usuario con la cedula $newCedula")
+                    }
+                } else {
+                    Log.d(TAG, "Error al obtener documentos", task.exception)
                 }
-                .addOnFailureListener {
-                    Toast.makeText(
-                        context,
-                        "Error al agregar el préstamo.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+            }
 
             Toast.makeText(context, "Préstamo agregado satisfactoriamente!", Toast.LENGTH_SHORT).show()
         } else {
@@ -232,20 +240,20 @@ class AsignarPrestamo : Fragment() {
                 //(tipoCredito != null && tipoCredito!!.checkedRadioButtonId != -1)
     }
 
-    private fun calculaCuota(newtasaInteres : String, newMontoMensualNum : Int, numCuotasNumerico : Int): String {
-        lateinit var cuotaMensual : String
+    private fun calculaCuota(newtasaInteres : String, newMontoMensualNum : Int, numCuotasNumerico : Int): Int {
+        var cuotaMensual = 0
         if (newtasaInteres == "7.5") {
             cuotaMensual =
-                (((newMontoMensualNum * 0.075) / (1 - (1 + 0.075).pow(numCuotasNumerico))).toString())
+                ((((newMontoMensualNum * 0.075) / (1 - (1 + 0.075).pow(numCuotasNumerico))).toInt()))
         } else if (newtasaInteres == "8") {
             cuotaMensual =
-                (((newMontoMensualNum * 0.8) / (1 - (1 + 0.8).pow(numCuotasNumerico))).toString())
+                ((((newMontoMensualNum * 0.8) / (1 - (1 + 0.8).pow(numCuotasNumerico))).toInt()))
         } else if (newtasaInteres == "10") {
             cuotaMensual =
-                (((newMontoMensualNum * 0.1) / (1 - (1 + 0.1).pow(numCuotasNumerico))).toString())
+                ((((newMontoMensualNum * 0.1) / (1 - (1 + 0.1).pow(numCuotasNumerico))).toInt()))
         } else if (newtasaInteres == "12") {
             cuotaMensual =
-                (((newMontoMensualNum * 0.12) / (1 - (1 + 0.12).pow(numCuotasNumerico))).toString())
+                ((((newMontoMensualNum * 0.12) / (1 - (1 + 0.12).pow(numCuotasNumerico))).toInt()))
         }
         return cuotaMensual
     }
