@@ -160,8 +160,6 @@ class AsignarPrestamo : Fragment() {
                 newTipodeCredito = "Viajes"
             }
 
-            val tipoCredit = newTipodeCredito
-
             // Captura informacion desde los RadioGroup Duracion del Prestamo
             val opcionDuracionPrest: Int = duracionPrestamo!!.checkedRadioButtonId
             btnDuracionPrestamo = view.findViewById(opcionDuracionPrest)
@@ -195,7 +193,7 @@ class AsignarPrestamo : Fragment() {
                 "Nombre" to newNombre,
                 "Salario" to newSalario,
                 "MontoPrestamo" to newMontoPrest,
-                "TipoCredito" to tipoCredit,
+                "TipoCredito" to newTipodeCredito,
                 "DuracionPrestamo" to newDuracPrest,
                 "TasaInteres" to newtasaInteres,
                 "MontoMensual" to newMontoMensualNum
@@ -241,21 +239,20 @@ class AsignarPrestamo : Fragment() {
     }
 
     private fun calculaCuota(newtasaInteres : String, newMontoMensualNum : Int, numCuotasNumerico : Int): Int {
-        var cuotaMensual = 0
-        if (newtasaInteres == "7.5") {
-            cuotaMensual =
-                ((((newMontoMensualNum * 0.075) / (1 - (1 + 0.075).pow(numCuotasNumerico))).toInt()))
-        } else if (newtasaInteres == "8") {
-            cuotaMensual =
-                ((((newMontoMensualNum * 0.8) / (1 - (1 + 0.8).pow(numCuotasNumerico))).toInt()))
-        } else if (newtasaInteres == "10") {
-            cuotaMensual =
-                ((((newMontoMensualNum * 0.1) / (1 - (1 + 0.1).pow(numCuotasNumerico))).toInt()))
-        } else if (newtasaInteres == "12") {
-            cuotaMensual =
-                ((((newMontoMensualNum * 0.12) / (1 - (1 + 0.12).pow(numCuotasNumerico))).toInt()))
+        val newSalario = salarioTextView.text.toString()
+        if(newMontoMensualNum > newSalario.toDouble() * 0.45){
+            Toast.makeText(context, "El prestamo no puede ser mayor al 45% del salario.", Toast.LENGTH_SHORT).show()
+        }else{
+            // Convertir la tasa de interés a decimal
+            val tasaInteresDecimal = newtasaInteres.toDouble() / 100
+
+            // Calcular la cuota mensual utilizando la fórmula
+            val cuota = (newMontoMensualNum * tasaInteresDecimal) / (1 - (1 + tasaInteresDecimal).pow(-numCuotasNumerico))
+
+            // Redondear el resultado y convertirlo a un entero
+            return cuota.toInt()
         }
-        return cuotaMensual
+        return 0
     }
 
 }
