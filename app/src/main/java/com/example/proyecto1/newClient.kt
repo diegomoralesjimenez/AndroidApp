@@ -134,6 +134,34 @@ class newClient : Fragment() {
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
+//----------------------------------------------------------------------------------
+                    // Crear la colección de préstamos dentro del documento
+                    val ahorrosRef =
+                        db.collection("Users").document(clienteId).collection("Ahorro")
+
+                    // Agregar un préstamo a la colección de préstamos
+                    val ahorro = hashMapOf(
+                        "Tipo" to "",
+                        "Monto" to 0.0,
+                    )
+
+                    ahorrosRef.add(ahorro)
+                        .addOnSuccessListener {
+                            Toast.makeText(
+                                context,
+                                "Cliente, préstamo y ahorro agregados satisfactoriamente!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(
+                                context,
+                                "Error al agregar el ahorro.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+//----------------------------------------------------------------------------------
 
                     Toast.makeText(context, "Cliente agregado satisfactoriamente!", Toast.LENGTH_SHORT).show()
                 }
