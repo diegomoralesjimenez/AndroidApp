@@ -141,48 +141,48 @@ class AsignarPrestamo : Fragment() {
     }
 
     fun insertar(view: View) {
+        // Completamos las variables
+        val newCedula = cedulaTextView.text.toString()
+        val newNombre = nombreTextView.text.toString()
+        val newSalario = salarioTextView.text.toString()
+        val newMontoPrest = montoPrestamo.text.toString()
+
+
+        var newTipodeCredito = ""
+        if (tasaInteres.text.toString() == "7.5") {
+            newTipodeCredito = "Hipotecario"
+        } else if (tasaInteres.text.toString() == "8") {
+            newTipodeCredito = "Educacion"
+        } else if (tasaInteres.text.toString() == "10") {
+            newTipodeCredito = "Personal"
+        } else if (tasaInteres.text.toString() == "12") {
+            newTipodeCredito = "Viajes"
+        }
+
+        // Captura informacion desde los RadioGroup Duracion del Prestamo
+        val opcionDuracionPrest: Int = duracionPrestamo!!.checkedRadioButtonId
+        btnDuracionPrestamo = view.findViewById(opcionDuracionPrest)
+        val newDuracPrest = btnDuracionPrestamo.text.toString()
+
+        //ESTOS SON EDITADOS POR EL ADMINISTRADOR
+        var newtasaInteres = tasaInteres.text.toString()
+
+
+        // Calculo de cuota mensual
+        lateinit var numCuotas: String
+        if (newDuracPrest == "3") {
+            numCuotas = "36"
+        } else if (newDuracPrest == "5") {
+            numCuotas = "60"
+        } else if (newDuracPrest == "10") {
+            numCuotas = "120"
+        }
+
+        val numCuotasNumerico = numCuotas.toInt()
+        newMontoMensual.setText(calculaCuota(newtasaInteres, newMontoPrest.toInt(), numCuotasNumerico).toString())
+        val newMontoMensualNum = newMontoMensual.text.toString()
+
         if (validarAtributos()) {
-            // Completamos las variables
-            val newCedula = cedulaTextView.text.toString()
-            val newNombre = nombreTextView.text.toString()
-            val newSalario = salarioTextView.text.toString()
-            val newMontoPrest = montoPrestamo.text.toString()
-
-
-            var newTipodeCredito = ""
-            if (tasaInteres.text.toString() == "7.5") {
-                newTipodeCredito = "Hipotecario"
-            } else if (tasaInteres.text.toString() == "8") {
-                newTipodeCredito = "Educacion"
-            } else if (tasaInteres.text.toString() == "10") {
-                newTipodeCredito = "Personal"
-            } else if (tasaInteres.text.toString() == "7.5") {
-                newTipodeCredito = "Viajes"
-            }
-
-            // Captura informacion desde los RadioGroup Duracion del Prestamo
-            val opcionDuracionPrest: Int = duracionPrestamo!!.checkedRadioButtonId
-            btnDuracionPrestamo = view.findViewById(opcionDuracionPrest)
-            val newDuracPrest = btnDuracionPrestamo.text.toString()
-
-            //ESTOS SON EDITADOS POR EL ADMINISTRADOR
-            var newtasaInteres = tasaInteres.text.toString()
-
-
-            // Calculo de cuota mensual
-            lateinit var numCuotas: String
-            if (newDuracPrest == "3") {
-                numCuotas = "36"
-            } else if (newDuracPrest == "5") {
-                numCuotas = "60"
-            } else if (newDuracPrest == "10") {
-                numCuotas = "120"
-            }
-
-            val numCuotasNumerico = numCuotas.toInt()
-            newMontoMensual.setText(calculaCuota(newtasaInteres, newMontoPrest.toInt(), numCuotasNumerico).toString())
-            val newMontoMensualNum = newMontoMensual.text.toString()
-
             // Coleccion
             val userRef = db.collection("Users").whereEqualTo("Cedula",newCedula)
 
@@ -234,6 +234,7 @@ class AsignarPrestamo : Fragment() {
                 !nombreTextView.text.isEmpty() &&
                 !salarioTextView.text.isEmpty() &&
                 !montoPrestamo.text.isEmpty() &&
+                !newMontoMensual.text.isEmpty() &&
                 (duracionPrestamo != null && duracionPrestamo!!.checkedRadioButtonId != -1)
                 //(tipoCredito != null && tipoCredito!!.checkedRadioButtonId != -1)
     }
