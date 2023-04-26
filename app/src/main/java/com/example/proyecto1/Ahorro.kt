@@ -68,7 +68,7 @@ class Ahorro : Fragment() {
 
             savingsDocRef.get().addOnSuccessListener { documentSnapshot ->
                 if (documentSnapshot.exists()) {
-                    val savingsValue = documentSnapshot.getDouble("monto$savingsType") ?: 0.0
+                    val savingsValue = documentSnapshot.getDouble("Monto$savingsType") ?: 0.0
                     val formattedSavingsValue = NumberFormat.getCurrencyInstance(Locale("es", "CR")).format(savingsValue)
                     savingsView.text = formattedSavingsValue
 

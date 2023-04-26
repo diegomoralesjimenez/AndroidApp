@@ -78,9 +78,10 @@ class AhorroProgramado : Fragment() {
             query.get().addOnSuccessListener { querySnapshot ->
                 if (querySnapshot.documents.size == 0) {
                     // No document with this TipoAhorro value exists, so it's safe to add a new one
-                    val newAhorroDoc = ahorroRef.document()
+                    val montoAhorroFieldName = "Monto" + tipoAhorro
+                    val newAhorroDoc = ahorroRef.document(tipoAhorro)
                     val data = hashMapOf(
-                        "MontoAhorro" to montoAhorroView.text.toString().toDouble(),
+                        montoAhorroFieldName to montoAhorroView.text.toString().toDouble(),
                         "Meses" to meses.text.toString().toInt(),
                         "TipoAhorro" to tipoAhorro
                     )
@@ -97,6 +98,7 @@ class AhorroProgramado : Fragment() {
                 }
             }
         }
+
 
 
         return view

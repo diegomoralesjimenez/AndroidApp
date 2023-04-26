@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -19,6 +20,8 @@ class Prestamo : Fragment() {
     private lateinit var userId: String
     private lateinit var prestamoAdapter: PrestamoAdapter
     private lateinit var recyclerView: RecyclerView
+
+    private lateinit var pagarBtn: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +37,8 @@ class Prestamo : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(activity)
         prestamoAdapter = PrestamoAdapter(listOf())
         recyclerView.adapter = prestamoAdapter
+
+        pagarBtn = view.findViewById(R.id.pagar)
 
         val prestamos = mutableListOf<Map<String, Any>>()
 
@@ -54,6 +59,17 @@ class Prestamo : Fragment() {
             .addOnFailureListener { exception ->
                 Log.e(TAG, "Error retrieving prestamos", exception)
             }
+
+
+        pagarBtn.setOnClickListener {
+            val newFragment = PagoPrestamo()
+
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.prestamo_layout, newFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
         return view
     }
 
