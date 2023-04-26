@@ -17,8 +17,6 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Objects
 import kotlin.math.pow
@@ -114,7 +112,7 @@ class AsignarPrestamo : Fragment() {
                     }
                 }.addOnFailureListener { exception ->
                     // An error occurred while retrieving the user information
-                    Log.w(TAG, "Error getting user information.", exception)
+                    Log.w(TAG, "Error al obtener la informacion.", exception)
                     nombreTextView.setText("")
                     salarioTextView.setText("Ocurrió un error al buscar al usuario.")
                 }
