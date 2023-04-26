@@ -37,6 +37,7 @@ class newClient : Fragment() {
         // Firestore y Firebase inicializado
         db = FirebaseFirestore.getInstance()
         userId = FirebaseAuth.getInstance().currentUser!!.uid
+        //userId = FirebaseAuth.getInstance().toString()
 
         // Variables inicializadas
 
@@ -58,7 +59,7 @@ class newClient : Fragment() {
 
     // Metodo insertar nuevo cliente
 
-    fun insertar(view : View){
+    fun insertar(view: View) {
 
         if (validarAtributos()) {
             //Datos que se actualizan
@@ -69,7 +70,7 @@ class newClient : Fragment() {
             val newFechaNacimiento = fechaTextView.text.toString()
 
             // Captura informacion desde los RadioGroup
-            val opcionEstadoCiv : Int = estadoCivilGroup!!.checkedRadioButtonId
+            val opcionEstadoCiv: Int = estadoCivilGroup!!.checkedRadioButtonId
             estadoCiv = view.findViewById(opcionEstadoCiv)
             val newEstadoCiv = estadoCiv.text.toString()
 
@@ -87,89 +88,138 @@ class newClient : Fragment() {
             // La siguiente linea muestra como guardar con la cedula como identificador
             //val prestamoRef = db.collection("Users").document(newCedula)
             //                .collection("Prestamos").document()
-
             //Creacion de los valores de la coleccion
-            val user = hashMapOf(
-                "Cedula" to newCedula,
-                "Nombre" to newNombre,
-                "Contraseña" to newContrasena,
-                "Direccion" to newDireccion,
-                "FechaNacimiento" to newFechaNacimiento,
-                "EstadoCivil" to newEstadoCiv,
-                "Salario" to newSalario,
-                "Role" to "Client"
-            )
 
-            userRef.set(user)
-                .addOnSuccessListener {
-                    val clienteId = userRef.id
+// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
+            // Crear instancia de FirebaseAuth
+            val mAuth = FirebaseAuth.getInstance()
 
-            // Crear la colección de préstamos dentro del documento
-                    val prestamosRef =
-                        db.collection("Users").document(clienteId).collection("Prestamos")
+            // Crear cuenta de usuario en Firebase
+            mAuth.createUserWithEmailAndPassword(newCedula + "@example.com", newContrasena)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // Obtener ID de usuario generado por Firebase
+                        val userId = mAuth.currentUser?.uid
 
-            // Agregar un préstamo a la colección de préstamos
-                    val prestamo = hashMapOf(
-                        "Cedula" to "",
-                        "Nombre" to "",
-                        "Salario" to "",
-                        "MontoPrestamo" to "",
-                        "TipoCredito" to "Inicio",
-                        "DuracionPrestamo" to "",
-                        "TasaInteres" to "",
-                        "MontoMensual" to ""
-                    )
+                        // Agregar información adicional del usuario en Firestore
+                        val user = hashMapOf(
+                            "Cedula" to newCedula,
+                            "Nombre" to newNombre,
+                            "Contraseña" to newContrasena,
+                            "Direccion" to newDireccion,
+                            "FechaNacimiento" to newFechaNacimiento,
+                            "EstadoCivil" to newEstadoCiv,
+                            "Salario" to newSalario,
+                            "Role" to "Client"
+                        )
 
-                    prestamosRef.add(prestamo)
-                        .addOnSuccessListener {
-                            Toast.makeText(
-                                context,
-                                "Cliente y préstamo agregados satisfactoriamente!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                        .addOnFailureListener {
-                            Toast.makeText(
-                                context,
-                                "Error al agregar el préstamo.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                        userRef.set(user)
+                            .addOnSuccessListener {
+                                val clienteId = userRef.id
+
+                                // Crear la colección de préstamos dentro del documento
+                                val prestamosRef =
+                                    db.collection("Users").document(clienteId)
+                                        .collection("Prestamos")
+
+                                // Agregar un préstamo a la colección de préstamos
+                                val prestamo = hashMapOf(
+                                    "Cedula" to "",
+                                    "Nombre" to "",
+                                    "Salario" to "",
+                                    "MontoPrestamo" to "",
+                                    "TipoCredito" to "Inicio",
+                                    "DuracionPrestamo" to "",
+                                    "TasaInteres" to "",
+                                    "MontoMensual" to ""
+                                )
+
+                                prestamosRef.add(prestamo)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(
+                                            context,
+                                            "Cliente y préstamo agregados satisfactoriamente!",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                    .addOnFailureListener {
+                                        Toast.makeText(
+                                            context,
+                                            "Error al agregar el préstamo.",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
 //----------------------------------------------------------------------------------
-                    // Crear la colección de préstamos dentro del documento
-                    val ahorrosRef =
-                        db.collection("Users").document(clienteId).collection("Ahorro")
+                                // Crear la colección de préstamos dentro del documento
+                                val ahorrosRef =
+                                    db.collection("Users").document(clienteId).collection("Ahorro")
 
-                    // Agregar un préstamo a la colección de préstamos
-                    val ahorro = hashMapOf(
-                        "Tipo" to "",
-                        "Monto" to 0.0,
-                    )
+                                // Agregar un préstamo a la colección de préstamos
+                                val ahorro = hashMapOf(
+                                    "Tipo" to "",
+                                    "Monto" to 0.0,
+                                )
 
-                    ahorrosRef.add(ahorro)
-                        .addOnSuccessListener {
-                            Toast.makeText(
-                                context,
-                                "Cliente, préstamo y ahorro agregados satisfactoriamente!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                        .addOnFailureListener {
-                            Toast.makeText(
-                                context,
-                                "Error al agregar el ahorro.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                                ahorrosRef.add(ahorro)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(
+                                            context,
+                                            "Cliente, préstamo y ahorro agregados satisfactoriamente!",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                    .addOnFailureListener {
+                                        Toast.makeText(
+                                            context,
+                                            "Error al agregar el ahorro.",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+
+
+                                db.collection("Users").document(userId!!)
+                                    .set(user)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(
+                                            context,
+                                            "Cliente agregado satisfactoriamente!",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                    .addOnFailureListener {
+                                        Toast.makeText(
+                                            context,
+                                            "Error al agregar el cliente.",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                            }.addOnFailureListener {
+                                Toast.makeText(
+                                    context,
+                                    "Error al agregar el cliente.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                    }
+// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------
 
-                    Toast.makeText(context, "Cliente agregado satisfactoriamente!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        "Cliente agregado satisfactoriamente!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(context, "Error al agregar el cliente.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Error al agregar el cliente.", Toast.LENGTH_SHORT)
+                        .show()
                 }
-        }else{
+        } else {
             Toast.makeText(context, "Todos los espacios deben llenarse.", Toast.LENGTH_SHORT).show()
         }
     }
