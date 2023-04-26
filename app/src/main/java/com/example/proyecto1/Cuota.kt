@@ -33,6 +33,11 @@ class Cuota : Fragment() {
     private lateinit var button3: Button
     private lateinit var button4: Button
 
+    private lateinit var button5: Button
+    private lateinit var button6: Button
+    private lateinit var button7: Button
+    private lateinit var button8: Button
+
     private lateinit var calcularBtn: Button
 
     override fun onCreateView(
@@ -57,11 +62,23 @@ class Cuota : Fragment() {
         button3 = view.findViewById(R.id.buttonV)
         button4 = view.findViewById(R.id.buttonO)
 
+        button5 = view.findViewById(R.id.button5)
+        button6 = view.findViewById(R.id.button6)
+        button7 = view.findViewById(R.id.button7)
+        button8 = view.findViewById(R.id.button8)
 
+        var tipoCredito = ""
         fun setInterestRate(interestRate: String, button: Button) {
             textInteres.setText(interestRate)
             if (button.currentTextColor != Color.BLACK) {
                 button.setTextColor(Color.BLACK)
+            }
+            tipoCredito = when(interestRate) {
+                "7.5" -> "Hipotecario"
+                "8" -> "Educacion"
+                "10" -> "Personal"
+                "12" -> "Viajes"
+                else -> ""
             }
         }
 
@@ -69,6 +86,17 @@ class Cuota : Fragment() {
         button2.setOnClickListener { setInterestRate("8", it as Button) }
         button3.setOnClickListener { setInterestRate("10", it as Button) }
         button4.setOnClickListener { setInterestRate("12", it as Button) }
+
+        var duracion = ""
+        fun duracionPrestamo(duracionPrestamo: String, button: Button) {
+            duracion = duracionPrestamo;
+        }
+
+        button5.setOnClickListener { duracionPrestamo("1", it as Button) }
+        button6.setOnClickListener { duracionPrestamo("3", it as Button) }
+        button7.setOnClickListener { duracionPrestamo("5", it as Button) }
+        button8.setOnClickListener { duracionPrestamo("10", it as Button) }
+
 
         calcularBtn = view.findViewById(R.id.calcular)
 
@@ -139,7 +167,9 @@ class Cuota : Fragment() {
                         newFragment.arguments = bundleOf(
                             "Prestamo" to prestamo,
                             "TasaInteres" to tasaInteres,
-                            "Monto" to monto
+                            "Monto" to monto,
+                            "DuracionPrestamo" to duracion,
+                            "TipoCredito" to tipoCredito
                         )
 
                         val transaction = requireActivity().supportFragmentManager.beginTransaction()

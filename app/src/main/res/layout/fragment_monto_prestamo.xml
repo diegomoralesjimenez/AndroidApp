@@ -63,7 +63,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/textView72"
+                    android:id="@+id/tipoCredito"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -147,7 +147,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/textView79"
+                    android:id="@+id/duracion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

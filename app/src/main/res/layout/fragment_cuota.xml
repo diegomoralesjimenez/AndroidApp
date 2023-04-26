@@ -144,7 +144,7 @@
                     android:layout_weight="1"
                     android:background="#FFFFFF"
                     android:backgroundTint="#FFFFFF"
-                    android:text="V" />
+                    android:text="P" />
 
                 <Button
                     android:id="@+id/buttonO"
@@ -155,7 +155,7 @@
                     android:layout_weight="1"
                     android:background="#FFFFFF"
                     android:backgroundTint="#FFFFFF"
-                    android:text="O" />
+                    android:text="V" />
             </LinearLayout>
 
             <LinearLayout
@@ -195,6 +195,7 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/button5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -206,7 +207,7 @@
                     android:textColor="#000000" />
 
                 <Button
-                    android:id="@+id/button82"
+                    android:id="@+id/button6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -218,7 +219,7 @@
                     android:textColor="#000000" />
 
                 <Button
-                    android:id="@+id/button9"
+                    android:id="@+id/button7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -230,7 +231,7 @@
                     android:textColor="#000000" />
 
                 <Button
-                    android:id="@+id/button10"
+                    android:id="@+id/button8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
