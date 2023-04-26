@@ -54,7 +54,7 @@ class Ahorro : Fragment() {
         ahorroBtn = view.findViewById(R.id.ahorroBtn)
 
 
-        val savingsTypes = arrayOf("Navideno", "Escolar", "Marchamo", "Extraordinario")
+        val savingsTypes = arrayOf("Navideño", "Escolar", "Marchamo", "Extraordinario")
         val savingsViews = arrayOf(navidenoView, escolarView, marchamoView, extraordinarioView)
 
         var ahorroTotalValue = 0.0 // create a variable to hold the total savings value

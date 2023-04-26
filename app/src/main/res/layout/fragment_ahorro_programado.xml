@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="50dp"
     android:background="@color/whiteClear"
     tools:context=".AhorroProgramado">
 
@@ -38,19 +39,21 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/txtSalario"
+                android:id="@+id/salario"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="#EE000000"
                 android:backgroundTint="#75E6E4E4"
+                android:clickable="false"
                 android:ems="10"
+                android:focusable="false"
                 android:fontFamily="@font/roboto_medium"
                 android:hint="Salario"
                 android:inputType="number"
                 android:paddingLeft="25dp"
-                android:textColor="#000000"
+                android:textColor="#7C000000"
                 android:textColorHint="#7C000000"
                 android:textSize="14sp" />
 
@@ -66,7 +69,7 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/txtPrestamo"
+                android:id="@+id/montoAhorro"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 android:layout_marginBottom="5dp"
@@ -93,7 +96,7 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/editTextNumber2"
+                android:id="@+id/meses"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 android:layout_marginTop="5dp"
@@ -142,6 +145,7 @@
                     android:orientation="vertical">
 
                     <Button
+                        android:id="@+id/buttonNav"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -154,7 +158,7 @@
                         android:textColor="#000000" />
 
                     <Button
-                        android:id="@+id/button821"
+                        android:id="@+id/buttonMarc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -174,6 +178,7 @@
                     android:orientation="vertical">
 
                     <Button
+                        android:id="@+id/buttonEsc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -186,7 +191,7 @@
                         android:textColor="#000000" />
 
                     <Button
-                        android:id="@+id/button82"
+                        android:id="@+id/buttonExtr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -201,7 +206,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btnAgregar"
+                android:id="@+id/aceptar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#6AFA89"

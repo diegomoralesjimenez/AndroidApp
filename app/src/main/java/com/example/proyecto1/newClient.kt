@@ -23,8 +23,7 @@ class newClient : Fragment() {
     private lateinit var salarioTextView: TextView
 
     private lateinit var db: FirebaseFirestore
-    private lateinit var userId: String
-
+    private lateinit var userId: FirebaseAuth
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
@@ -36,8 +35,8 @@ class newClient : Fragment() {
 
         // Firestore y Firebase inicializado
         db = FirebaseFirestore.getInstance()
-        userId = FirebaseAuth.getInstance().currentUser!!.uid
-        //userId = FirebaseAuth.getInstance().toString()
+        //userId = FirebaseAuth.getInstance().currentUser!!.uid
+        userId = FirebaseAuth.getInstance();
 
         // Variables inicializadas
 
