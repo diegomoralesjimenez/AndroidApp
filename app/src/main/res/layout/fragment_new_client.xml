@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".newClient"
-    android:background="@color/whiteClear">
+    android:layout_marginBottom="50dp"
+    android:background="@color/whiteClear"
+    tools:context=".newClient">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,23 +45,45 @@
             android:textSize="14sp"
             tools:ignore="RtlHardcoded,RtlSymmetry,TextContrastCheck" />
 
-        <EditText
-            android:id="@+id/nombre"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="49dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:autofillHints=""
-            android:background="#EE000000"
-            android:backgroundTint="#75E6E4E4"
-            android:ems="10"
-            android:fontFamily="@font/roboto_medium"
-            android:hint="@string/nombre"
-            android:inputType="textPersonName"
-            android:paddingLeft="25dp"
-            android:textColor="#000000"
-            android:textColorHint="#7C000000"
-            android:textSize="14sp"
-            tools:ignore="RtlHardcoded,RtlSymmetry,TextContrastCheck" />
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/nombre"
+                android:layout_width="120dp"
+                android:layout_height="49dp"
+                android:layout_marginRight="10dp"
+                android:background="#EE000000"
+                android:backgroundTint="#75E6E4E4"
+                android:ems="10"
+                android:fontFamily="@font/roboto_medium"
+                android:hint="Nombre"
+                android:inputType="textPersonName"
+                android:paddingLeft="25dp"
+                android:textColor="#000000"
+                android:textColorHint="#7C000000"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/apellidos"
+                android:layout_width="wrap_content"
+                android:layout_height="49dp"
+                android:layout_weight="1"
+                android:background="#EE000000"
+                android:backgroundTint="#75E6E4E4"
+                android:ems="10"
+                android:fontFamily="@font/roboto_medium"
+                android:hint="Apellidos"
+                android:inputType="textPersonName"
+                android:paddingLeft="25dp"
+                android:textColor="#000000"
+                android:textColorHint="#7C000000"
+                android:textSize="14sp" />
+
+        </LinearLayout>
 
         <EditText
             android:id="@+id/contraseña"
