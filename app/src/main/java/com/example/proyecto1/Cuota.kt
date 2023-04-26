@@ -3,6 +3,8 @@ package com.example.proyecto1
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,8 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.NumberFormat
+import java.util.*
 
 class Cuota : Fragment() {
 
@@ -73,12 +77,42 @@ class Cuota : Fragment() {
         docRef.get().addOnSuccessListener { documentSnapshot ->
             if (documentSnapshot.exists()) {
                 //Get a los valores de la coleccion
+                val formatter = NumberFormat.getCurrencyInstance(Locale("es", "CR"))
                 val salario = documentSnapshot.getDouble("Salario")
-                salarioView.setText(salario.toString())
-
-
+                val salarioFormatted = formatter.format(salario)
+                salarioView.setText(salarioFormatted)
             }
         }
+
+        prestamoView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not needed
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Not needed
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val formatter = NumberFormat.getCurrencyInstance(Locale("es", "CR"))
+                val salario = formatter.parse(salarioView.text.toString())?.toDouble()
+                val prestamo = s.toString().toFloatOrNull()
+
+                // Format the input to the Costa Rican currency
+                if (prestamo != null) {
+                    val prestamoFormatted = formatter.format(prestamo)
+                }
+
+                if (salario != null && prestamo != null && prestamo > salario) {
+                    prestamoView.error = "El prestamo debe ser menor o igual al salario"
+                    calcularBtn.isEnabled = false
+                } else {
+                    prestamoView.error = null
+                    calcularBtn.isEnabled = true
+                }
+            }
+        })
+
 
         calcularBtn.setOnClickListener {
             // Get the entered salary and interest rate values
@@ -88,7 +122,8 @@ class Cuota : Fragment() {
             if (prestamoStr.isBlank() || tasaInteresStr.isBlank()) {
                 Toast.makeText(activity, "Please enter valid values", Toast.LENGTH_SHORT).show()
             } else {
-                val salario = salarioView.text.toString().toFloatOrNull()
+                val formatter = NumberFormat.getCurrencyInstance(Locale("es", "CR"))
+                val salario = formatter.parse(salarioView.text.toString())?.toDouble()
                 val prestamo = prestamoStr.toFloatOrNull()
                 val tasaInteres = tasaInteresStr.toFloatOrNull()
 

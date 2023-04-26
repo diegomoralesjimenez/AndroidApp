@@ -54,10 +54,8 @@ class Prestamo : Fragment() {
             .addOnFailureListener { exception ->
                 Log.e(TAG, "Error retrieving prestamos", exception)
             }
-
-
-
         return view
     }
+
 
 }

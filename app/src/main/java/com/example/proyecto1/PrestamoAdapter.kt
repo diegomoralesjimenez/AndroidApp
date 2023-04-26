@@ -1,9 +1,12 @@
 package com.example.proyecto1
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import java.text.NumberFormat
 import java.util.*
@@ -12,9 +15,11 @@ class PrestamoAdapter(private val prestamos: List<Map<String, Any>>) :
     RecyclerView.Adapter<PrestamoAdapter.PrestamoViewHolder>() {
 
     class PrestamoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         val loanTypeTextView: TextView = itemView.findViewById(R.id.loan_type)
         val monthsLeftTextView: TextView = itemView.findViewById(R.id.months_left)
         val amountLeftTextView: TextView = itemView.findViewById(R.id.amount_left)
+        val payButton: Button = itemView.findViewById(R.id.pay_button)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PrestamoViewHolder {
@@ -32,7 +37,10 @@ class PrestamoAdapter(private val prestamos: List<Map<String, Any>>) :
         holder.amountLeftTextView.text = formatter.format(prestamo["Monto"] as Double)
     }
 
+
     override fun getItemCount(): Int {
         return prestamos.size
     }
+
+
 }
