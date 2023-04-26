@@ -102,7 +102,6 @@ class Cuota : Fragment() {
                 if (prestamo != null) {
                     val prestamoFormatted = formatter.format(prestamo)
                 }
-
                 if (salario != null && prestamo != null && prestamo > salario) {
                     prestamoView.error = "El prestamo debe ser menor o igual al salario"
                     calcularBtn.isEnabled = false
