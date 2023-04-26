@@ -17,8 +17,6 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Objects
 import kotlin.math.pow
@@ -114,7 +112,7 @@ class AsignarPrestamo : Fragment() {
                     }
                 }.addOnFailureListener { exception ->
                     // An error occurred while retrieving the user information
-                    Log.w(TAG, "Error getting user information.", exception)
+                    Log.w(TAG, "Error al obtener la informacion.", exception)
                     nombreTextView.setText("")
                     salarioTextView.setText("Ocurrió un error al buscar al usuario.")
                 }
@@ -133,8 +131,8 @@ class AsignarPrestamo : Fragment() {
 
         btnHipo.setOnClickListener { setInterestRate("7.5", it as Button) }
         btnEduca.setOnClickListener { setInterestRate("8", it as Button) }
-        btnViaje.setOnClickListener { setInterestRate("10", it as Button) }
-        btnPersonal.setOnClickListener { setInterestRate("12", it as Button) }
+        btnViaje.setOnClickListener { setInterestRate("12", it as Button) }
+        btnPersonal.setOnClickListener { setInterestRate("10", it as Button) }
 
 
         return view
@@ -143,8 +141,6 @@ class AsignarPrestamo : Fragment() {
     fun insertar(view: View) {
         // Completamos las variables
         val newCedula = cedulaTextView.text.toString()
-        val newNombre = nombreTextView.text.toString()
-        val newSalario = salarioTextView.text.toString()
         val newMontoPrest = montoPrestamo.text.toString()
 
 
@@ -189,9 +185,6 @@ class AsignarPrestamo : Fragment() {
 
             // Agregar un préstamo a la colección de préstamos
             val prestamo = hashMapOf(
-                "Cedula" to newCedula,
-                "Nombre" to newNombre,
-                "Salario" to newSalario,
                 "MontoPrestamo" to newMontoPrest,
                 "TipoCredito" to newTipodeCredito,
                 "DuracionPrestamo" to newDuracPrest,
