@@ -41,10 +41,10 @@ class Prestamo : Fragment() {
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for (document in querySnapshot.documents) {
-                    val anos = document.getString("Annos") ?: ""
-                    val monto = document.getDouble("Monto") ?: 0.0
-                    val tipo = document.getString("Tipo") ?: ""
-                    val prestamo = mapOf("Annos" to anos, "Monto" to monto, "Tipo" to tipo)
+                    val anos = document.getString("DuracionPrestamo") ?: ""
+                    val monto = document.getString("MontoMensual") ?: ""
+                    val tipo = document.getString("TipoCredito") ?: ""
+                    val prestamo = mapOf("DuracionPrestamo" to anos, "MontoMensual" to monto, "TipoCredito" to tipo)
                     prestamos.add(prestamo)
                 }
 

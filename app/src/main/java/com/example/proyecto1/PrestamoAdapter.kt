@@ -30,11 +30,15 @@ class PrestamoAdapter(private val prestamos: List<Map<String, Any>>) :
 
     override fun onBindViewHolder(holder: PrestamoViewHolder, position: Int) {
         val prestamo = prestamos[position]
-        holder.loanTypeTextView.text = prestamo["Tipo"] as String
-        holder.monthsLeftTextView.text = "${prestamo["Annos"]}"
+        holder.loanTypeTextView.text = prestamo["TipoCredito"] as String
+        holder.monthsLeftTextView.text = "${prestamo["DuracionPrestamo"]}"
         val formatter = NumberFormat.getCurrencyInstance(Locale("es", "CR"))
         formatter.currency = Currency.getInstance("CRC")
-        holder.amountLeftTextView.text = formatter.format(prestamo["Monto"] as Double)
+
+        val montoMensual = prestamo["MontoMensual"] as String
+        val montoMensualDouble = montoMensual.toDoubleOrNull()
+
+        holder.amountLeftTextView.text = formatter.format(montoMensualDouble)
     }
 
 
