@@ -96,7 +96,8 @@ class newClient : Fragment() {
                 "Direccion" to newDireccion,
                 "FechaNacimiento" to newFechaNacimiento,
                 "EstadoCivil" to newEstadoCiv,
-                "Salario" to newSalario
+                "Salario" to newSalario,
+                "Role" to "Client"
             )
 
             userRef.set(user)
