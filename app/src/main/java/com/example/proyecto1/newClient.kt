@@ -79,77 +79,82 @@ class newClient : Fragment() {
 
             val newSalario = salarioTextView.text.toString().toInt()
 
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(newCedula + "@gmail.com", newContrasena)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        // Coleccion
-                        //val userRef = db.collection("Users").document()
-
-                        //Creacion de los valores de la coleccion
-                        val user = hashMapOf(
-                            "Cedula" to newCedula,
-                            "Nombre" to newNombre,
-                            "Apellidos" to newApellidos,
-                            "Contraseña" to newContrasena,
-                            "Direccion" to newDireccion,
-                            "FechaNacimiento" to newFechaNacimiento,
-                            "EstadoCivil" to newEstadoCiv,
-                            "Salario" to newSalario,
-                            "Role" to "Client"
-                        )
-                        db.collection("Users").document(task.result!!.user!!.uid).set(user)
-                        val userRef = db.collection("Users").whereEqualTo("Cedula",newCedula)
-
-                        userRef.get().addOnCompleteListener { task ->
+            // Coleccion
+            val userRef = db.collection("Users")
+            val query = userRef.whereEqualTo("Cedula", newCedula)
+            query.get().addOnSuccessListener { querySnapshot ->
+                if (querySnapshot.documents.size == 0) {
+                    //-------------------------------------------------------------
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(newCedula + "@gmail.com", newContrasena)
+                        .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                val documents = task.result?.documents
-                                if (documents != null && documents.isNotEmpty()) {
-                                    val userDocRef = documents[0].reference
-                                    val prestamosCollectionRef = userDocRef.collection("Prestamos")
-                                    val ahorrosCollectionRef = userDocRef.collection("Ahorro")
+                                //Creacion de los valores de la coleccion
+                                val user = hashMapOf(
+                                    "Cedula" to newCedula,
+                                    "Nombre" to newNombre,
+                                    "Apellidos" to newApellidos,
+                                    "Contraseña" to newContrasena,
+                                    "Direccion" to newDireccion,
+                                    "FechaNacimiento" to newFechaNacimiento,
+                                    "EstadoCivil" to newEstadoCiv,
+                                    "Salario" to newSalario,
+                                    "Role" to "Client"
+                                )
+                                db.collection("Users").document(task.result!!.user!!.uid).set(user)
+                                val userRef = db.collection("Users").whereEqualTo("Cedula",newCedula)
 
-                                    // Agregar un préstamo a la colección de préstamos
-                                    val prestamo = hashMapOf(
-                                        "MontoPrestamo" to "",
-                                        "TipoCredito" to "Inicio",
-                                        "DuracionPrestamo" to "",
-                                        "TasaInteres" to "",
-                                        "MontoMensual" to ""
-                                    )
+                                userRef.get().addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        val documents = task.result?.documents
+                                        if (documents != null && documents.isNotEmpty()) {
+                                            val userDocRef = documents[0].reference
+                                            val prestamosCollectionRef = userDocRef.collection("Prestamos")
+                                            val ahorrosCollectionRef = userDocRef.collection("Ahorro")
+                                            // Agregar un préstamo a la colección de préstamos
+                                            val prestamo = hashMapOf(
+                                                "MontoPrestamo" to "",
+                                                "TipoCredito" to "Inicio",
+                                                "DuracionPrestamo" to "",
+                                                "TasaInteres" to "",
+                                                "MontoMensual" to ""
+                                            )
+                                            val ahorro = hashMapOf(
+                                                "TipoAhorro" to "",
+                                                "MontoAhorro" to 0.0,
+                                                "Meses" to 0
+                                            )
+                                            // Agregar el nuevo préstamo con el método add()
+                                            prestamosCollectionRef.add(prestamo)
+                                                .addOnSuccessListener {
+                                                    Log.d(ContentValues.TAG, "Prestamo agregado exitosamente")
+                                                }
+                                                .addOnFailureListener { e ->
+                                                    Log.e(ContentValues.TAG, "Error al agregar prestamo", e)
+                                                }
 
-                                    val ahorro = hashMapOf(
-                                        "TipoAhorro" to "",
-                                        "MontoAhorro" to 0.0,
-                                        "Meses" to 0
-                                    )
-
-                                    // Agregar el nuevo préstamo con el método add()
-                                    prestamosCollectionRef.add(prestamo)
-                                        .addOnSuccessListener {
-                                            Log.d(ContentValues.TAG, "Prestamo agregado exitosamente")
+                                            // Agregar el nuevo préstamo con el método add()
+                                            ahorrosCollectionRef.add(ahorro)
+                                                .addOnSuccessListener {
+                                                    Log.d(ContentValues.TAG, "Ahorro agregado exitosamente")
+                                                }
+                                                .addOnFailureListener { e ->
+                                                    Log.e(ContentValues.TAG, "Error al agregar Ahorro", e)
+                                                }
+                                        } else {
+                                            Log.d(ContentValues.TAG, "No existe un usuario con la cedula $newCedula")
                                         }
-                                        .addOnFailureListener { e ->
-                                            Log.e(ContentValues.TAG, "Error al agregar prestamo", e)
-                                        }
-
-                                    // Agregar el nuevo préstamo con el método add()
-                                    ahorrosCollectionRef.add(ahorro)
-                                        .addOnSuccessListener {
-                                            Log.d(ContentValues.TAG, "Ahorro agregado exitosamente")
-                                        }
-                                        .addOnFailureListener { e ->
-                                            Log.e(ContentValues.TAG, "Error al agregar Ahorro", e)
-                                        }
-                                } else {
-                                    Log.d(ContentValues.TAG, "No existe un usuario con la cedula $newCedula")
+                                    } else {
+                                        Log.d(ContentValues.TAG, "Error al obtener documentos", task.exception)
+                                    }
                                 }
-                            } else {
-                                Log.d(ContentValues.TAG, "Error al obtener documentos", task.exception)
+                                Toast.makeText(context, "Usuario registrado y autenticado exitosamente.", Toast.LENGTH_SHORT).show()
                             }
                         }
-                        Toast.makeText(context, "Usuario registrado y autenticado exitosamente.", Toast.LENGTH_SHORT).show()
-                    }
+                    //-------------------------------------------------------------
+                }else{
+                    Toast.makeText(context,"El usuario fue previamente registrado",Toast.LENGTH_SHORT).show()
                 }
+            }
         }else{
             Toast.makeText(context, "Todos los espacios deben llenarse.", Toast.LENGTH_SHORT).show()
         }
@@ -159,6 +164,7 @@ class newClient : Fragment() {
     private fun validarAtributos(): Boolean {
         return !cedulaTextView.text.isEmpty() &&
                 !nombreTextView.text.isEmpty() &&
+                !apellidosTextView.text.isEmpty() &&
                 !contrasenaTextView.text.isEmpty() &&
                 !direccionTextView.text.isEmpty() &&
                 !fechaTextView.text.isEmpty() &&
