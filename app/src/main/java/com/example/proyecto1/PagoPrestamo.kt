@@ -95,26 +95,31 @@ class PagoPrestamo : Fragment() {
                         val montoPrestamoStr = document.getString("MontoPrestamo")
                         val montoPrestamo = montoPrestamoStr?.toDoubleOrNull() ?: 0.0
                         if (montoPrestamo >= selectedMontoMensual.toDouble()) {
-                            val updatedMontoPrestamo = montoPrestamo - selectedMontoMensual.toDouble()
-                            document.reference.update("MontoPrestamo", updatedMontoPrestamo.toString())
-                            document.reference.update("Pagado", true)
-
-                            // Update the Dinero field of the corresponding user
+                            // Check if the user has enough money to make the payment
                             val docRef = db.collection("Users").document(userId)
                             docRef.get().addOnSuccessListener { userDoc ->
                                 val dinero = userDoc.getDouble("Dinero") ?: 0.0
-                                val updatedDinero = dinero - selectedMontoMensual.toDouble()
-                                docRef.update("Dinero", updatedDinero)
-                            }
+                                if (dinero >= selectedMontoMensual.toDouble()) {
+                                    val updatedMontoPrestamo = montoPrestamo - selectedMontoMensual.toDouble()
+                                    document.reference.update("MontoPrestamo", updatedMontoPrestamo.toString())
+                                    document.reference.update("Pagado", true)
 
-                            Toast.makeText(requireContext(), "Pago exitoso!", Toast.LENGTH_SHORT).show()
+                                    // Update the Dinero field of the corresponding user
+                                    val updatedDinero = dinero - selectedMontoMensual.toDouble()
+                                    docRef.update("Dinero", updatedDinero)
+
+                                    Toast.makeText(requireContext(), "Pago exitoso!", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    Toast.makeText(requireContext(), "No tienes suficiente dinero para realizar el pago.", Toast.LENGTH_SHORT).show()
+                                }
+                            }
                         } else {
                             Toast.makeText(requireContext(), "No tienes suficiente dinero para realizar el pago.", Toast.LENGTH_SHORT).show()
                         }
-
                     }
                 }
         }
+
 
 
         return view
