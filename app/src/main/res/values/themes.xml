@@ -17,6 +17,7 @@
         <!-- Customize your theme here. -->
     </style>
 
+
     <style name="Theme.Proyecto1.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

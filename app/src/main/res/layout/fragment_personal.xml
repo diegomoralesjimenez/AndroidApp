@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Personal"
-    android:background="@color/whiteClear">
+    android:background="@color/whiteClear"
+    android:fitsSystemWindows="true"
+    android:windowSoftInputMode="adjustResize">
 
     <!-- TODO: Update blank fragment layout -->
 
