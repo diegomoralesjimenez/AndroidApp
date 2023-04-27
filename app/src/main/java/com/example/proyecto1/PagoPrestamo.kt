@@ -57,8 +57,7 @@ class PagoPrestamo : Fragment() {
                         val tipoCredito = document.getString("TipoCredito")
                         val montoMensual = document.getString("MontoMensual")
                         val pagado = document.getBoolean("Pagado")
-
-                        if (tipoCredito != null && montoMensual != null && !pagado!!) {
+                        if (!tipoCredito.isNullOrEmpty() && !montoMensual.isNullOrEmpty() && pagado != null && !pagado) {
                             val formatter = NumberFormat.getCurrencyInstance(Locale("es", "CR"))
                             formatter.currency = Currency.getInstance("CRC")
                             val montoMensualFormatted = formatter.format(montoMensual.toDouble())
