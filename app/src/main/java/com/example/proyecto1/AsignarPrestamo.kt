@@ -229,6 +229,7 @@ class AsignarPrestamo : Fragment() {
                 !salarioTextView.text.isEmpty() &&
                 !montoPrestamo.text.isEmpty() &&
                 !newMontoMensual.text.isEmpty() &&
+                newMontoMensual.text.toString().toDouble() > 0.0 &&
                 (duracionPrestamo != null && duracionPrestamo!!.checkedRadioButtonId != -1)
                 //(tipoCredito != null && tipoCredito!!.checkedRadioButtonId != -1)
     }
