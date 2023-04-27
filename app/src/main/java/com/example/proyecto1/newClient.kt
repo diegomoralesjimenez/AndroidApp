@@ -182,7 +182,8 @@ class newClient : Fragment() {
                 !direccionTextView.text.isEmpty() &&
                 !fechaTextView.text.isEmpty() &&
                 (estadoCivilGroup != null && estadoCivilGroup!!.checkedRadioButtonId != -1) &&
-                !salarioTextView.text.isEmpty()
+                !salarioTextView.text.isEmpty() &&
+                !dineroTextView.text.isEmpty()
     }
 
 
