@@ -26,6 +26,7 @@ class AsignarPrestamo : Fragment() {
     // TextView
     private lateinit var cedulaTextView: TextView
     private lateinit var nombreTextView: TextView
+    private lateinit var apellidosTextView: TextView
     private lateinit var salarioTextView: TextView
     private lateinit var montoPrestamo: TextView
     private lateinit var tasaInteres: TextView
@@ -59,7 +60,8 @@ class AsignarPrestamo : Fragment() {
         // Variables inicializadas
 
         cedulaTextView = view.findViewById(R.id.cedulaPrest)
-        nombreTextView = view.findViewById(R.id.txtNombreCliente)
+        nombreTextView = view.findViewById(R.id.nombre)
+        apellidosTextView = view.findViewById(R.id.apellidos)
         salarioTextView = view.findViewById(R.id.txtSalario)
         montoPrestamo = view.findViewById(R.id.txtPrestamo)
         tasaInteres = view.findViewById(R.id.txtTasaInteres)
@@ -102,8 +104,10 @@ class AsignarPrestamo : Fragment() {
                         // The user exists, so retrieve their information
                         val documentSnapshot = querySnapshot.documents[0]
                         val nombre = documentSnapshot.getString("Nombre")
+                        val apellidos = documentSnapshot.getString("Apellidos")
                         val salario = documentSnapshot.getDouble("Salario")
                         nombreTextView.setText(nombre)
+                        apellidosTextView.setText(apellidos)
                         salarioTextView.setText(salario.toString())
                     } else {
                         // The user does not exist
@@ -114,6 +118,7 @@ class AsignarPrestamo : Fragment() {
                     // An error occurred while retrieving the user information
                     Log.w(TAG, "Error al obtener la informacion.", exception)
                     nombreTextView.setText("")
+                    apellidosTextView.setText("")
                     salarioTextView.setText("Ocurrió un error al buscar al usuario.")
                 }
             }
@@ -226,6 +231,7 @@ class AsignarPrestamo : Fragment() {
     private fun validarAtributos(): Boolean {
         return !cedulaTextView.text.isEmpty() &&
                 !nombreTextView.text.isEmpty() &&
+                !apellidosTextView.text.isEmpty() &&
                 !salarioTextView.text.isEmpty() &&
                 !montoPrestamo.text.isEmpty() &&
                 !newMontoMensual.text.isEmpty() &&
