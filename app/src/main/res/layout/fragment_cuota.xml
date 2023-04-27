@@ -20,7 +20,8 @@
             android:paddingLeft="45dp"
             android:paddingTop="30dp"
             android:paddingRight="45dp"
-            android:paddingBottom="120dp">
+            android:paddingBottom="120dp"
+            tools:ignore="ScrollViewSize">
 
             <TextView
                 android:id="@+id/txtTitulo"
@@ -30,7 +31,8 @@
                 android:text="Calcular Cuota"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/titulo"
@@ -41,7 +43,8 @@
                 android:text="Salario"
                 android:textAlignment="textStart"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
 
             <EditText
                 android:id="@+id/salario"
@@ -60,7 +63,8 @@
                 android:paddingLeft="25dp"
                 android:textColor="#7C000000"
                 android:textColorHint="#7C000000"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TouchTargetSizeCheck,TextContrastCheck,VisualLintTextFieldSize" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -71,7 +75,8 @@
                 android:text="Prestamo"
                 android:textAlignment="textStart"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
 
             <EditText
                 android:id="@+id/prestamo"
@@ -87,7 +92,8 @@
                 android:paddingLeft="25dp"
                 android:textColor="#000000"
                 android:textColorHint="#7C000000"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TouchTargetSizeCheck,TextContrastCheck,DuplicateSpeakableTextCheck,VisualLintTextFieldSize" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -105,7 +111,8 @@
                     android:text="Tipo de credito"
                     android:textAlignment="textStart"
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText,InefficientWeight" />
             </LinearLayout>
 
             <LinearLayout
@@ -121,7 +128,8 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:background="@color/white"
-                    android:text="H" />
+                    android:text="H"
+                    tools:ignore="ButtonStyle,HardcodedText,TextContrastCheck,VisualLintButtonSize" />
 
                 <Button
                     android:id="@+id/buttonE"
@@ -132,7 +140,8 @@
                     android:layout_weight="1"
                     android:background="#FFFFFF"
                     android:backgroundTint="#FFFFFF"
-                    android:text="E" />
+                    android:text="E"
+                    tools:ignore="ButtonStyle,HardcodedText,TextContrastCheck,VisualLintButtonSize" />
 
                 <Button
                     android:id="@+id/buttonV"
@@ -143,7 +152,8 @@
                     android:layout_weight="1"
                     android:background="#FFFFFF"
                     android:backgroundTint="#FFFFFF"
-                    android:text="P" />
+                    android:text="P"
+                    tools:ignore="ButtonStyle,HardcodedText,TextContrastCheck,VisualLintButtonSize" />
 
                 <Button
                     android:id="@+id/buttonO"
@@ -154,7 +164,8 @@
                     android:layout_weight="1"
                     android:background="#FFFFFF"
                     android:backgroundTint="#FFFFFF"
-                    android:text="V" />
+                    android:text="V"
+                    tools:ignore="ButtonStyle,HardcodedText,TextContrastCheck,VisualLintButtonSize" />
             </LinearLayout>
 
             <LinearLayout
@@ -173,7 +184,8 @@
                     android:text="Duracion del prestamo"
                     android:textAlignment="textStart"
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText,TextSizeCheck" />
 
                 <TextView
                     android:id="@+id/textView10"
@@ -185,7 +197,8 @@
                     android:text="años"
                     android:textAlignment="textEnd"
                     android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
             </LinearLayout>
 
             <LinearLayout
@@ -203,7 +216,8 @@
                     android:backgroundTint="#FFFFFF"
                     android:fontFamily="@font/roboto_black"
                     android:text="1"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    tools:ignore="ButtonStyle,HardcodedText,TouchTargetSizeCheck,VisualLintButtonSize" />
 
                 <Button
                     android:id="@+id/button6"
@@ -215,7 +229,8 @@
                     android:backgroundTint="#FFFFFF"
                     android:fontFamily="@font/roboto_black"
                     android:text="3"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    tools:ignore="ButtonStyle,HardcodedText,TouchTargetSizeCheck,VisualLintButtonSize" />
 
                 <Button
                     android:id="@+id/button7"
@@ -227,7 +242,8 @@
                     android:backgroundTint="#FFFFFF"
                     android:fontFamily="@font/roboto_black"
                     android:text="5"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    tools:ignore="ButtonStyle,HardcodedText,TouchTargetSizeCheck,VisualLintButtonSize" />
 
                 <Button
                     android:id="@+id/button8"
@@ -237,7 +253,8 @@
                     android:backgroundTint="#FFFFFF"
                     android:fontFamily="@font/roboto_black"
                     android:text="10"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    tools:ignore="ButtonStyle,HardcodedText,TouchTargetSizeCheck,VisualLintButtonSize" />
             </LinearLayout>
 
             <TextView
@@ -249,7 +266,8 @@
                 android:text="Tasa de Interes"
                 android:textAlignment="textStart"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
 
             <EditText
                 android:id="@+id/txtTasaInteres"
@@ -267,7 +285,8 @@
                 android:paddingLeft="25dp"
                 android:textColor="#7C000000"
                 android:textColorHint="#7C000000"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TouchTargetSizeCheck,TextContrastCheck" />
 
             <Button
                 android:id="@+id/calcular"

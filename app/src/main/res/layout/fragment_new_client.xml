@@ -42,7 +42,7 @@
             android:textColor="#000000"
             android:textColorHint="#7C000000"
             android:textSize="14sp"
-            tools:ignore="RtlHardcoded,RtlSymmetry,TextContrastCheck" />
+            tools:ignore="RtlHardcoded,RtlSymmetry,TextContrastCheck,VisualLintTextFieldSize" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,7 +64,8 @@
                 android:paddingLeft="25dp"
                 android:textColor="#000000"
                 android:textColorHint="#7C000000"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck" />
 
             <EditText
                 android:id="@+id/apellidos"
@@ -80,7 +81,8 @@
                 android:paddingLeft="25dp"
                 android:textColor="#000000"
                 android:textColorHint="#7C000000"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:ignore="Autofill,HardcodedText,InefficientWeight,RtlHardcoded,RtlSymmetry,TextContrastCheck,VisualLintTextFieldSize" />
 
         </LinearLayout>
 
@@ -100,7 +102,7 @@
             android:textColor="#000000"
             android:textColorHint="#7C000000"
             android:textSize="14sp"
-            tools:ignore="RtlHardcoded,RtlSymmetry,TextContrastCheck" />
+            tools:ignore="RtlHardcoded,RtlSymmetry,TextContrastCheck,VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/direccion"
@@ -117,7 +119,7 @@
             android:textColor="#000000"
             android:textColorHint="#7C000000"
             android:textSize="14sp"
-            tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck" />
+            tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck,VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/fechaNacimiento"
@@ -134,7 +136,7 @@
             android:textColor="#000000"
             android:textColorHint="#7C000000"
             android:textSize="14sp"
-            tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck" />
+            tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck,VisualLintTextFieldSize" />
 
         <TextView
             android:id="@+id/textView3"
@@ -185,7 +187,7 @@
             android:textColor="#000000"
             android:textColorHint="#7C000000"
             android:textSize="14sp"
-            tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck" />
+            tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck,VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/dinero"
@@ -204,7 +206,7 @@
             android:textColor="#000000"
             android:textColorHint="#7C000000"
             android:textSize="14sp"
-            tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck" />
+            tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck,VisualLintTextFieldSize" />
 
         <Button
             android:id="@+id/add"
@@ -214,7 +216,7 @@
             android:fontFamily="@font/roboto_black"
             android:text="Agregar"
             android:textAllCaps="false"
-            tools:ignore="HardcodedText,VisualLintButtonSize" />
+            tools:ignore="HardcodedText,VisualLintButtonSize,TouchTargetSizeCheck" />
 
     </LinearLayout>
 

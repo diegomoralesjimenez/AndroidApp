@@ -12,7 +12,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,7 +28,8 @@
                 android:text="Pago Prestamo"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -38,7 +40,8 @@
                 android:text="Cuenta"
                 android:textAlignment="textStart"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
 
             <EditText
                 android:id="@+id/dinero"
@@ -48,15 +51,16 @@
                 android:layout_marginBottom="5dp"
                 android:background="#EE000000"
                 android:backgroundTint="#75E6E4E4"
-                android:focusable="false"
                 android:ems="10"
+                android:focusable="false"
                 android:fontFamily="@font/roboto_medium"
                 android:hint="Dinero"
                 android:inputType="number"
                 android:paddingLeft="25dp"
                 android:textColor="#7C000000"
                 android:textColorHint="#7C000000"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -67,7 +71,8 @@
                 android:text="Prestamo"
                 android:textAlignment="textStart"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
@@ -82,7 +87,8 @@
                     android:backgroundTint="#75E6E4E4"
                     android:hint="Seleccione un Prestamo"
                     android:inputType="none"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:ignore="HardcodedText,TextContrastCheck,VisualLintTextFieldSize" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -93,7 +99,8 @@
                 android:backgroundTint="#6AFA89"
                 android:fontFamily="@font/roboto_black"
                 android:text="Aceptar"
-                android:textAllCaps="true" />
+                android:textAllCaps="true"
+                tools:ignore="HardcodedText,TextContrastCheck,VisualLintButtonSize" />
 
             <Button
                 android:id="@+id/button4"
@@ -102,7 +109,8 @@
                 android:backgroundTint="#E83F3F"
                 android:fontFamily="@font/roboto_black"
                 android:text="Cancelar"
-                android:textAllCaps="true" />
+                android:textAllCaps="true"
+                tools:ignore="HardcodedText,VisualLintButtonSize" />
 
         </LinearLayout>
     </ScrollView>

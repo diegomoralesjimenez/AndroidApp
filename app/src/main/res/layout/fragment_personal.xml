@@ -10,7 +10,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,7 +29,8 @@
                 android:text="Personal"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                tools:ignore="HardcodedText" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,7 +53,8 @@
                     android:paddingLeft="25dp"
                     android:textColor="#000000"
                     android:textColorHint="#7C000000"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck" />
 
                 <EditText
                     android:id="@+id/apellidos"
@@ -69,7 +72,8 @@
                     android:paddingLeft="25dp"
                     android:textColor="#000000"
                     android:textColorHint="#7C000000"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:ignore="Autofill,HardcodedText,InefficientWeight,RtlHardcoded,RtlSymmetry,TextContrastCheck,VisualLintTextFieldSize" />
 
             </LinearLayout>
 
@@ -87,7 +91,8 @@
                 android:paddingLeft="25dp"
                 android:textColor="#000000"
                 android:textColorHint="#7C000000"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck,VisualLintTextFieldSize" />
 
             <EditText
                 android:id="@+id/fechaNacimiento"
@@ -103,7 +108,8 @@
                 android:paddingLeft="25dp"
                 android:textColor="#000000"
                 android:textColorHint="#7C000000"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck,VisualLintTextFieldSize" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -112,7 +118,8 @@
                 android:fontFamily="@font/roboto_bold"
                 android:text="Estado Civil"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
 
             <RadioGroup
                 android:id="@+id/radio_group_estadocivil"
@@ -120,19 +127,22 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                tools:ignore="ObsoleteLayoutParam">
 
                 <RadioButton
                     android:id="@+id/radio_button_soltero"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Soltero" />
+                    android:text="Soltero"
+                    tools:ignore="HardcodedText" />
 
                 <RadioButton
                     android:id="@+id/radio_button_casado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Casado" />
+                    android:text="Casado"
+                    tools:ignore="HardcodedText" />
 
             </RadioGroup>
 
@@ -151,7 +161,8 @@
                 android:paddingBottom="4dp"
                 android:textColor="#000000"
                 android:textColorHint="#7C000000"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded,RtlSymmetry,TextContrastCheck,VisualLintTextFieldSize" />
 
             <Button
                 android:id="@+id/update"
@@ -160,7 +171,8 @@
                 android:backgroundTint="#000000"
                 android:fontFamily="@font/roboto_black"
                 android:text="Actualizar"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText,VisualLintButtonSize" />
 
         </LinearLayout>
     </ScrollView>

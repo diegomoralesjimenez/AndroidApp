@@ -25,7 +25,8 @@
             android:text="Monto\nMensual"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="48sp" />
+            android:textSize="48sp"
+            tools:ignore="HardcodedText" />
 
         <EditText
             android:id="@+id/editTextNumberDecimal"
@@ -39,7 +40,8 @@
             android:text="C 100,000"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="34sp" />
+            android:textSize="34sp"
+            tools:ignore="Autofill,HardcodedText,LabelFor,VisualLintTextFieldSize" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,7 +58,8 @@
                 android:fontFamily="@font/roboto_black"
                 android:text="Cliente"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView758"
@@ -66,7 +69,8 @@
                 android:text="John Doe Gonzales"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
         <LinearLayout
@@ -84,7 +88,8 @@
                 android:fontFamily="@font/roboto_black"
                 android:text="Tipo de Credito"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:ignore="HardcodedText,TextSizeCheck" />
 
             <TextView
                 android:id="@+id/textView72"
@@ -94,7 +99,8 @@
                 android:text="Hipotecario"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
         <LinearLayout
@@ -112,7 +118,8 @@
                 android:fontFamily="@font/roboto_black"
                 android:text="Interes"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView75"
@@ -122,7 +129,8 @@
                 android:text="7.5%"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
         <LinearLayout
@@ -140,7 +148,8 @@
                 android:fontFamily="@font/roboto_black"
                 android:text="Prestamo"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView77"
@@ -150,7 +159,8 @@
                 android:text="4,000,000"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
         <LinearLayout
@@ -168,7 +178,8 @@
                 android:fontFamily="@font/roboto_black"
                 android:text="Años"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView79"
@@ -178,7 +189,8 @@
                 android:text="1"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
     </LinearLayout>
