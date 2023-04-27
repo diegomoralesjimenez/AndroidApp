@@ -164,6 +164,7 @@ class newClient : Fragment() {
     private fun validarAtributos(): Boolean {
         return !cedulaTextView.text.isEmpty() &&
                 !nombreTextView.text.isEmpty() &&
+                !apellidosTextView.text.isEmpty() &&
                 !contrasenaTextView.text.isEmpty() &&
                 !direccionTextView.text.isEmpty() &&
                 !fechaTextView.text.isEmpty() &&
