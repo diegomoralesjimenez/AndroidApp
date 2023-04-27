@@ -19,7 +19,7 @@ class PrestamoAdapter(private val prestamos: List<Map<String, Any>>) :
         val loanTypeTextView: TextView = itemView.findViewById(R.id.loan_type)
         val monthsLeftTextView: TextView = itemView.findViewById(R.id.months_left)
         val amountLeftTextView: TextView = itemView.findViewById(R.id.amount_left)
-        val payButton: Button = itemView.findViewById(R.id.pay_button)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PrestamoViewHolder {

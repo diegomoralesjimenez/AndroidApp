@@ -20,7 +20,7 @@
             android:paddingLeft="45dp"
             android:paddingTop="30dp"
             android:paddingRight="45dp"
-            android:paddingBottom="95dp">
+            android:paddingBottom="120dp">
 
             <TextView
                 android:id="@+id/txtTitulo"
@@ -52,7 +52,6 @@
                 android:background="#EE000000"
                 android:backgroundTint="#75E6E4E4"
                 android:clickable="false"
-                android:editable="false"
                 android:ems="10"
                 android:focusable="false"
                 android:fontFamily="@font/roboto_medium"

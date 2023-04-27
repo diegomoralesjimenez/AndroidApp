@@ -84,7 +84,7 @@ class Ahorro : Fragment() {
             val newFragment = AhorroProgramado()
 
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_ahorro, newFragment)
+            transaction.replace(R.id.ahorro_layout, newFragment)
             transaction.addToBackStack(null)
             transaction.commit()
         }

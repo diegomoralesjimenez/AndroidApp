@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whiteClear"
-    android:paddingLeft="45dp"
-    android:paddingTop="30dp"
-    android:paddingRight="45dp"
-    android:paddingBottom="50dp"
     tools:context=".Ahorro"
-    android:id="@+id/fragment_ahorro">
+    android:id="@+id/ahorro_layout">
 
     <LinearLayout
+        android:paddingLeft="45dp"
+        android:paddingTop="30dp"
+        android:paddingRight="45dp"
+        android:paddingBottom="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
