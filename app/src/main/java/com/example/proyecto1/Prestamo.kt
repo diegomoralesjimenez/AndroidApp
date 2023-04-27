@@ -49,8 +49,11 @@ class Prestamo : Fragment() {
                     val anos = document.getString("DuracionPrestamo") ?: ""
                     val monto = document.getString("MontoMensual") ?: ""
                     val tipo = document.getString("TipoCredito") ?: ""
-                    val prestamo = mapOf("DuracionPrestamo" to anos, "MontoMensual" to monto, "TipoCredito" to tipo)
-                    prestamos.add(prestamo)
+
+                    if (!anos.isNullOrEmpty() && !monto.isNullOrEmpty() && !tipo.isNullOrEmpty()) {
+                        val prestamo = mapOf("DuracionPrestamo" to anos, "MontoMensual" to monto, "TipoCredito" to tipo)
+                        prestamos.add(prestamo)
+                    }
                 }
 
                 prestamoAdapter = PrestamoAdapter(prestamos)

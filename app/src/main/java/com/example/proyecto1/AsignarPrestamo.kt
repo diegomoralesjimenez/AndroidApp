@@ -189,7 +189,8 @@ class AsignarPrestamo : Fragment() {
                 "TipoCredito" to newTipodeCredito,
                 "DuracionPrestamo" to newDuracPrest,
                 "TasaInteres" to newtasaInteres,
-                "MontoMensual" to newMontoMensualNum
+                "MontoMensual" to newMontoMensualNum,
+                "Pagado" to false
             )
 
             userRef.get().addOnCompleteListener { task ->

@@ -48,13 +48,13 @@
                 android:layout_marginBottom="5dp"
                 android:background="#EE000000"
                 android:backgroundTint="#75E6E4E4"
+                android:focusable="false"
                 android:ems="10"
                 android:fontFamily="@font/roboto_medium"
                 android:hint="Dinero"
-                android:clickable="false"
                 android:inputType="number"
                 android:paddingLeft="25dp"
-                android:textColor="#000000"
+                android:textColor="#7C000000"
                 android:textColorHint="#7C000000"
                 android:textSize="14sp" />
 
@@ -78,55 +78,13 @@
                     android:id="@+id/auto"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="20dp"
+                    android:backgroundTint="#75E6E4E4"
+                    android:hint="Seleccione un Prestamo"
                     android:inputType="none"
-                    android:text="AutoCompleteTextView" />
+                    android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
-            <EditText
-                android:id="@+id/prestamo"
-                android:layout_width="match_parent"
-                android:layout_height="47dp"
-                android:layout_marginBottom="5dp"
-                android:background="#EE000000"
-                android:backgroundTint="#75E6E4E4"
-                android:ems="10"
-                android:clickable="false"
-                android:fontFamily="@font/roboto_medium"
-                android:hint="Prestamo"
-                android:inputType="number"
-                android:paddingLeft="25dp"
-                android:textColor="#000000"
-                android:textColorHint="#7C000000"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="Monto"
-                android:textAlignment="textStart"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-
-            <EditText
-                android:id="@+id/editTextNumber2"
-                android:layout_width="match_parent"
-                android:layout_height="47dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="#EE000000"
-                android:backgroundTint="#75E6E4E4"
-                android:ems="10"
-                android:fontFamily="@font/roboto_medium"
-                android:hint="Meses"
-                android:inputType="number"
-                android:paddingLeft="25dp"
-                android:textColor="#000000"
-                android:textColorHint="#7C000000"
-                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/btnAgregar"

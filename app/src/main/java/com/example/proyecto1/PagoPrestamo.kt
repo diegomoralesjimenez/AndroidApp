@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.EditText
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,10 +18,11 @@ class PagoPrestamo : Fragment() {
     private lateinit var userId: String
 
     private lateinit var dineroTextView: EditText
-    private lateinit var montoPrestamoView: EditText
 
     private lateinit var autoCompleteTextView: AutoCompleteTextView
     private val prestamosList = ArrayList<String>()
+
+    private lateinit var btnAceptar: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,10 +37,10 @@ class PagoPrestamo : Fragment() {
 
         // Variables inicializadas
         dineroTextView = view.findViewById(R.id.dinero)
-        montoPrestamoView = view.findViewById(R.id.prestamo)
 
         autoCompleteTextView = view.findViewById(R.id.auto)
 
+        btnAceptar = view.findViewById(R.id.btnAgregar)
 
         // [GET] Agarra la informacion de la collecion de los usuarios de la base de datos
         val prestamosRef = db.collection("Users").document(userId).collection("Prestamos")
@@ -56,14 +54,24 @@ class PagoPrestamo : Fragment() {
 
                 prestamosRef.get().addOnSuccessListener { result ->
                     for (document in result) {
-                        val prestamo = document.getString("TipoCredito") // assuming that the name of the prestamo is stored in a field called "nombre"
-                        if (prestamo != null) {
+                        val tipoCredito = document.getString("TipoCredito")
+                        val montoMensual = document.getString("MontoMensual")
+                        val pagado = document.getBoolean("Pagado")
+
+                        if (tipoCredito != null && montoMensual != null && !pagado!!) {
+                            val formatter = NumberFormat.getCurrencyInstance(Locale("es", "CR"))
+                            formatter.currency = Currency.getInstance("CRC")
+                            val montoMensualFormatted = formatter.format(montoMensual.toDouble())
+
+                            val prestamo = "$tipoCredito: $montoMensualFormatted"
                             prestamosList.add(prestamo)
                         }
                     }
                     val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, prestamosList)
                     autoCompleteTextView.setAdapter(adapter)
                 }
+
+
 
                 //val prestamo = documentSnapshot.getDouble("Dinero")
                 val formatter = NumberFormat.getCurrencyInstance(Locale("es", "CR"))
@@ -72,6 +80,41 @@ class PagoPrestamo : Fragment() {
 
                 dineroTextView.setText(dineroFormatted)
             }
+        }
+
+        btnAceptar.setOnClickListener {
+            val selectedPrestamo = autoCompleteTextView.text.toString()
+            var selectedMontoMensual = selectedPrestamo.split(": ")[1].replace(Regex("[^\\d.]"), "").toInt()
+            selectedMontoMensual /= 100
+
+            prestamosRef
+                .whereEqualTo("MontoMensual", selectedMontoMensual.toString())
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    if (!querySnapshot.isEmpty) {
+                        val document = querySnapshot.documents[0]
+                        val montoPrestamoStr = document.getString("MontoPrestamo")
+                        val montoPrestamo = montoPrestamoStr?.toDoubleOrNull() ?: 0.0
+                        if (montoPrestamo >= selectedMontoMensual.toDouble()) {
+                            val updatedMontoPrestamo = montoPrestamo - selectedMontoMensual.toDouble()
+                            document.reference.update("MontoPrestamo", updatedMontoPrestamo.toString())
+                            document.reference.update("Pagado", true)
+
+                            // Update the Dinero field of the corresponding user
+                            val docRef = db.collection("Users").document(userId)
+                            docRef.get().addOnSuccessListener { userDoc ->
+                                val dinero = userDoc.getDouble("Dinero") ?: 0.0
+                                val updatedDinero = dinero - selectedMontoMensual.toDouble()
+                                docRef.update("Dinero", updatedDinero)
+                            }
+
+                            Toast.makeText(requireContext(), "Pago exitoso!", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(requireContext(), "No tienes suficiente dinero para realizar el pago.", Toast.LENGTH_SHORT).show()
+                        }
+
+                    }
+                }
         }
 
 

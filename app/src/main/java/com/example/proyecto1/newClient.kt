@@ -19,6 +19,7 @@ class newClient : Fragment() {
     private lateinit var apellidosTextView: TextView
     private lateinit var contrasenaTextView: TextView
     private lateinit var direccionTextView: TextView
+    private lateinit var dineroTextView: TextView
     private lateinit var fechaTextView: TextView
     private var estadoCivilGroup : RadioGroup? = null
     lateinit var estadoCiv: RadioButton
@@ -50,6 +51,7 @@ class newClient : Fragment() {
         fechaTextView = view.findViewById(R.id.fechaNacimiento)
         estadoCivilGroup = view.findViewById(R.id.radioGroup)
         salarioTextView = view.findViewById(R.id.txtSalario)
+        dineroTextView = view.findViewById(R.id.dinero)
 
         val addButton = view.findViewById<Button>(R.id.add)
         addButton.setOnClickListener {
@@ -71,6 +73,7 @@ class newClient : Fragment() {
             val newContrasena = contrasenaTextView.text.toString()
             val newDireccion = direccionTextView.text.toString()
             val newFechaNacimiento = fechaTextView.text.toString()
+            val newDinero = dineroTextView.text.toString().toDouble()
 
             // Captura informacion desde los RadioGroup
             val opcionEstadoCiv : Int = estadoCivilGroup!!.checkedRadioButtonId
@@ -98,7 +101,8 @@ class newClient : Fragment() {
                                     "FechaNacimiento" to newFechaNacimiento,
                                     "EstadoCivil" to newEstadoCiv,
                                     "Salario" to newSalario,
-                                    "Role" to "Client"
+                                    "Role" to "Client",
+                                    "Dinero" to newDinero
                                 )
                                 db.collection("Users").document(task.result!!.user!!.uid).set(user)
                                 val userRef = db.collection("Users").whereEqualTo("Cedula",newCedula)
