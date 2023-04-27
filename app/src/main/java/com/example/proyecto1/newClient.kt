@@ -151,6 +151,15 @@ class newClient : Fragment() {
                                         Log.d(ContentValues.TAG, "Error al obtener documentos", task.exception)
                                     }
                                 }
+                                cedulaTextView.text = ""
+                                nombreTextView.text= ""
+                                apellidosTextView.text= ""
+                                contrasenaTextView.text= ""
+                                direccionTextView.text= ""
+                                fechaTextView.text= ""
+                                dineroTextView.text= ""
+
+                                salarioTextView.text= ""
                                 Toast.makeText(context, "Usuario registrado y autenticado exitosamente.", Toast.LENGTH_SHORT).show()
                             }
                         }
