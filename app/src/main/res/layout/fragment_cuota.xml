@@ -127,7 +127,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:background="@color/white"
+                    android:background="@color/green"
                     android:text="H"
                     tools:ignore="ButtonStyle,HardcodedText,TextContrastCheck,VisualLintButtonSize" />
 
@@ -217,7 +217,7 @@
                     android:fontFamily="@font/roboto_black"
                     android:text="1"
                     android:textColor="#000000"
-                    tools:ignore="ButtonStyle,HardcodedText,TouchTargetSizeCheck,VisualLintButtonSize" />
+                   />
 
                 <Button
                     android:id="@+id/button6"
