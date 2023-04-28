@@ -112,6 +112,7 @@ class AsignarPrestamo : Fragment() {
                     } else {
                         // The user does not exist
                         nombreTextView.setText("")
+                        apellidosTextView.setText("")
                         salarioTextView.setText("No se encontró al usuario con la cédula especificada.")
                     }
                 }.addOnFailureListener { exception ->
