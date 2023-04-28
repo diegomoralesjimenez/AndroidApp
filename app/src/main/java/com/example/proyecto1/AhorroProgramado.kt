@@ -72,36 +72,46 @@ class AhorroProgramado : Fragment() {
         }
 
         btnAccept.setOnClickListener {
-            val ahorroRef = db.collection("Users").document(userId).collection("Ahorro")
-            val tipoAhorro = tipo
-            val query = ahorroRef.whereEqualTo("TipoAhorro", tipoAhorro)
-            query.get().addOnSuccessListener { querySnapshot ->
-                if (querySnapshot.documents.size == 0) {
-                    // No document with this TipoAhorro value exists, so it's safe to add a new one
-                    val montoAhorroFieldName = "Monto" + tipoAhorro
-                    val newAhorroDoc = ahorroRef.document(tipoAhorro)
-                    val data = hashMapOf(
-                        montoAhorroFieldName to montoAhorroView.text.toString().toDouble(),
-                        "Meses" to meses.text.toString().toInt(),
-                        "TipoAhorro" to tipoAhorro
-                    )
-                    newAhorroDoc.set(data)
-                        .addOnSuccessListener {
-                            Toast.makeText(context, "Se ha agregado su ahorro", Toast.LENGTH_SHORT).show()
-                        }
-                        .addOnFailureListener {
-                            // Handle failed insertion
-                        }
-                } else {
-                    // A document with this TipoAhorro value already exists, so don't add a new one
-                    Toast.makeText(context, "Ya existe un ahorro de tipo $tipoAhorro", Toast.LENGTH_SHORT).show()
+            if(validarAtributos()){
+                val ahorroRef = db.collection("Users").document(userId).collection("Ahorro")
+                val tipoAhorro = tipo
+                val query = ahorroRef.whereEqualTo("TipoAhorro", tipoAhorro)
+                query.get().addOnSuccessListener { querySnapshot ->
+                    if (querySnapshot.documents.size == 0) {
+                        // No document with this TipoAhorro value exists, so it's safe to add a new one
+                        val montoAhorroFieldName = "Monto" + tipoAhorro
+                        val newAhorroDoc = ahorroRef.document(tipoAhorro)
+                        val data = hashMapOf(
+                            montoAhorroFieldName to montoAhorroView.text.toString().toDouble(),
+                            "Meses" to meses.text.toString().toInt(),
+                            "TipoAhorro" to tipoAhorro
+                        )
+                        newAhorroDoc.set(data)
+                            .addOnSuccessListener {
+                                Toast.makeText(context, "Se ha agregado su ahorro", Toast.LENGTH_SHORT).show()
+                            }
+                            .addOnFailureListener {
+                                // Handle failed insertion
+                            }
+                    } else {
+                        // A document with this TipoAhorro value already exists, so don't add a new one
+                        Toast.makeText(context, "Ya existe un ahorro de tipo $tipoAhorro", Toast.LENGTH_SHORT).show()
+                    }
                 }
+            }else{
+                Toast.makeText(context, "Por favor complete todos los espacios.40249", Toast.LENGTH_SHORT).show()
             }
         }
 
 
 
         return view
+    }
+
+    private fun validarAtributos(): Boolean {
+        return !salarioView.text.isEmpty() &&
+                !montoAhorroView.text.isEmpty() &&
+                !meses.text.isEmpty()
     }
 
 }
